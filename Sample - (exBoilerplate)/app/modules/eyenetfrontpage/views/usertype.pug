@@ -1,0 +1,29 @@
+extends ../../../templates/eyenet
+
+block content
+    div.ui.container
+        div.padl.padd.padb
+            div.ui.segment.eheight
+                div.ui.top.attached.large.inverted.green.label User Maintenance
+                a.button.green.right.floated.ui.basic.button.huge(href="/maintenance/Citizenship/new")
+                    i.add.icon
+                    |&nbsp; Add User Type
+                div.paddd
+                table.ui.celled.padded.table
+                    thead
+                        tr.single.line.center.aligned 
+                            th.one.wide ID 
+                            th Name
+                            th.one.wide Payment Status
+                            th.three.wide Course
+                            th.two.wide Course Status
+                            th.two.wide Actions
+                    tr
+                        th
+                        th 
+                        th
+                        th
+                        th 
+                        th.center.aligned
+                            a.item(href=""): i.black.big.edit.icon
+                            a.item(href=""): i.black.big.remove.icon

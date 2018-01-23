@@ -1,0 +1,52 @@
+extends ../../../templates/base
+
+block body
+    - var hasText = typeof incorrect !== 'undefined' ? 'Incorrect Username or Password' : ''
+    div.ui.container
+        div.ui.middle.teal.inverted.segment
+            if hasText 
+                .ui.warning.message 
+                    i.close.icon
+                    div.header #{hasText}
+                        p Please Try Again
+            form.ui.form(method="POST" action="/login")
+                div.six.wide.field
+                    label.white Username
+                    input(type="text" name="username" placeholder="Username")
+                div.six.wide.field
+                    label.ui.teal Password
+                    input(type="password" name="password")
+                div.ui.center.aligned
+                    button#mod.ui.basic.button.three.wide.green.inverted.field(type="button")
+                        i.large.check.icon
+                        p click to Login
+                    button.ui.basic.button.three.wide.green.inverted.field(type="submit" value="Login")
+                        i.large.user.add.icon 
+                        p signup
+            div.ui.mini.modal.lheight()
+                i#close.circular.inverted.red.close.icon
+                form.ui.form.marga.paddingzxc.exB(method="POST" action="/login")
+                    div.ui.container.you 
+                        div.center.aligned
+                            i.circular.huge.users.icon
+                    div.thirteen.wide.field
+                        label.white Username
+                        input(type="text" name="username" placeholder="Username")
+                    div.thirteen.wide.field
+                        label.ui.teal Password
+                        input(type="password" name="password")
+                    div.ui
+                        button.ui.button.thirteen.wide.green.field(type="submit" value="Login")
+                            i.sign.in.icon 
+                            p Login
+                       
+                script.
+                    $('.ui.modal')
+                        .modal('attach events','#mod','show')
+                        .modal('attach events','#close','hide')
+                    ;
+                    sweetAlert("Oops!","Something went wrong!","error!")
+                    
+                    
+
+                                       

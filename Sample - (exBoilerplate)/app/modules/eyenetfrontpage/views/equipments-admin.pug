@@ -1,0 +1,72 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    style.
+      #pointer {
+      width: 200px;
+      height: 40px;
+      position: relative;
+      background: green;
+      }
+      #pointer:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      right: -40px;
+      border-top: 40px solid green;
+      border-right: 40px solid transparent;
+      }
+      .stroke{
+      margin: 5px;
+      -webkit-text-stroke: 1px white;
+      font-size: 24pt;
+      font-family: Arial;
+      color: green;
+      }
+      .button {
+      background-color: green;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 5px;
+      margin-left: 6px;
+      margin-right: 6px;
+      }
+      .button:hover{
+      background-color:  rgb(48, 194, 48)
+      }
+      .left{
+      float: right;
+      }
+      table, th, td {
+      border: 1px solid black;
+      }
+  body
+    #pointer
+      strong
+        p.stroke Equipments
+    br
+    br
+    table(style='width:100%')
+      tr
+        th(style='width:10%') Equipment ID
+        th(style='width:30%') Equipment Name
+        th(style='width:20%') Equipment Type
+        th(style='width:10%') Equipment Quantity
+        th(style='width:15%') Equipment Status
+        th(style='width:10%')
+      tr
+        td
+        td
+        td
+        td
+        td
+        td
+          button.button Edit
+          button.button Delete

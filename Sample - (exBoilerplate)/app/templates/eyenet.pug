@@ -1,0 +1,45 @@
+extends ./base 
+
+block body
+    div.ui.secondary.top.fixed.pointing.menu
+        div.right.menu
+            a.menu.item(href="")
+                i.circular.mail.outline.icon
+            a.menu.item(href="")
+                i.circular.setting.icon
+            a.menu.item(href="/logout")     
+                i.circular.sign.out.icon 
+                p Log-out
+    div.ui.huge.left.fixed.inverted.vertical.menu 
+        img.ui.centered.small.image.active(src="/assets/Faculty/eyenetlogo.png")
+        img.ui.centered.small.image(src="/assets/Faculty/eyenettext.png")
+        div.ui.inverted.accordion
+            div.item
+                div.title.active Maintenance
+                    i.dropdown.icon
+                div.content
+                    div.vertical.menu
+                        a.item(class=(activeTab === 'info' ? 'active' : '') href="/eyenet/maintenance/equipmenttype") Equipment Types
+                        a.item(href="/eyenet/maintenance/users") User Type   
+            div.item
+                div.title Transactions
+                    i.dropdown.icon
+                div.content
+                    div.vertical.menu
+                        a.item.active(href="/eyenet/maintenance/reservations") Reservations
+                        a.item(href="") Enrollment Requests  
+            div.item
+                div.title Reports
+                    i.dropdown.icon
+                div.content
+                    div.vertical.menu
+                        a.item(href="/eyenet/home") Equipments
+                        a.item.active(href="/eyenet/maintenance/qstudent") Students
+                        a.item(href="") Schedule
+                    //dapat andito yung Equipments
+                
+                
+    block content   
+    script.
+        $('.ui.accordion').accordion();
+    

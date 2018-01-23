@@ -1,0 +1,45 @@
+extends ../../../templates/eyenet
+
+block content
+    div.ui.container
+        div.padl.padd.padb
+            div.ui.segment.eheight
+                div.ui.ribbon.label.huge.inverted.blue 
+                p Citizenship
+                    i.configure.icon
+            a.button.green.right.floated.ui.basic.button.huge(href="/maintenance/Citizenship/new")
+                i.add.icon
+                |&nbsp; Add Citizenship
+            table.ui.padded.yellow.table   
+                th
+                    tr
+                        th.eleven.wide.tp.t-align Citizenship
+                        th.tp Actions  
+                    each citizen in citizens        
+                        tr
+                            td= citizen.strCitizenshipName
+                            td
+                                a(href=`/maintenance/Citizenship/${citizen.strCitizenshipID}`): i.ui.green.address.edit.icon.large
+                                | &nbsp;
+                                a(href=`/maintenance/Citizenship/${citizen.strCitizenshipID}/remove`): i.ui.green.remove.icon.large
+                
+                
+                div.ui.top.attached.large.inverted.green.label User Maintenance
+                table.ui.celled.padded.table
+                    thead
+                        tr.single.line.center.aligned 
+                            th.one.wide ID 
+                            th Name
+                            th.one.wide Payment Status
+                            th.three.wide Course
+                            th.two.wide Course Status
+                            th.two.wide Actions
+                    tr
+                        th
+                        th 
+                        th
+                        th
+                        th 
+                        th.center.aligned
+                            a.item(href=""): i.black.big.edit.icon
+                            a.item(href=""): i.black.big.remove.icon
