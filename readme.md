@@ -4,9 +4,9 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 
 ##Software Updates
 1. February 22, 2017  (7:30:00 PM) - added three modules 
-##A.eyenet
-##B.eyenetAdmin
-##C.eyenetUsers
+- A.eyenet
+- B.eyenetAdmin
+- C.eyenetUsers
 - working CRUD for Equipment Type
 - working CRUD for User Type
 - working CRUD for Schedule Type
