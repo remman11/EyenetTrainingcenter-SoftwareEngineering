@@ -1,0 +1,30 @@
+extends ./eyenetbase 
+block body
+    div.ui.secondary.top.fixed.pointing.menu
+        div.right.menu
+            a.menu.item(href="/eyenet/messages")
+                i.circular.mail.outline.icon
+            a.menu.item(href="settings")
+                i.circular.setting.icon
+            a.menu.item(href="/logout")     
+                i.circular.sign.out.icon 
+                p Log-in
+    div.ui.huge.left.fixed.inverted.vertical.menu 
+        img.ui.centered.small.image.active(src="/assets/Faculty/eyenetlogo.png")
+        img.ui.centered.small.image(src="/assets/Faculty/eyenettext.png")
+        div.ui.inverted.accordion
+            div.item
+                div.title Dashboard  
+            div.item
+                div.title View Schedule Of Activities
+            div.item
+                div.title View Course Information
+            div.item.active
+                div.title Request Documents
+        
+    block content   
+    script.
+        $('.ui.accordion').accordion();
+        $('#butt').click
+            .sidebar('show')
+        ;

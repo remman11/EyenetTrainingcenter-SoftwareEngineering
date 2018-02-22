@@ -1,0 +1,30 @@
+extends ../../../templates/baseh
+
+block body
+    section.wrrapNavbar
+        nav.navbar.navbar-default
+            div.container
+               <!-- Brand and toggle get grouped for better mobile display -->
+                div.navbar-header
+                    a.navbar-toogle.collapsed(type="button" data-toggle="collapse")
+                        span.sr-only Toogle Navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand Eye
+                        span Net
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                div#bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                            a(href="/eyenet/header") Home
+                        li.active
+                            a(href="/eyenet/about") About 
+                            span.sr-only (current)
+                        li
+                            a(href="/eyenet/contact") Contact
+                        li
+                            a(href="/") Login
+    section#portfolio
+    section#about
+    section#contact

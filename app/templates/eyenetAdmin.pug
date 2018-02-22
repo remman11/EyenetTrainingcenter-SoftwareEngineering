@@ -1,0 +1,48 @@
+extends ./eyenetbase
+block body
+    div.ui.secondary.top.fixed.pointing.menu
+        div.right.menu
+            a.menu.item(href="/eyenetAdmin/messages")
+                i.circular.mail.outline.icon
+            a.menu.item(href="")
+                i.circular.setting.icon
+            a.menu.item(href="/logout")     
+                i.circular.sign.out.icon 
+                p Log-out
+    div.ui.huge.left.fixed.inverted.vertical.menu 
+        img.ui.centered.small.image.active(src="/assets/Faculty/eyenetlogo.png")
+        img.ui.centered.small.image(src="/assets/Faculty/eyenettext.png")
+        div.ui.inverted.accordion
+            div#dash.item
+                a.title(href="/eyenetAdmin/dashboard") Dashboard
+            div#main.item
+                div.title Maintenance
+                    i.dropdown.icon
+                div#con1.content
+                    div.vertical.menu
+                        a#equip.item(href="/eyenetAdmin/equiptype") Equipment Types
+                        a#user.item(href="/eyenetAdmin/usertype") User Type
+                        a#sched.item(href="/eyenetAdmin/scheduleList") Schedule      
+            div#trans.item
+                div.title Transactions
+                    i.dropdown.icon
+                div#con2.content
+                    div.vertical.menu   
+                        a.item(href="/eyenetAdmin/maintenance/reservations") Reservations
+                        a.item(href="") Enrollment Requests  
+            div#reports.item
+                div.title Reports
+                    i.dropdown.icon
+                div#con3.content
+                    div.vertical.menu
+                        a#eq.item(href="/eyenetAdmin/equipment") Equipments
+                        a#st.item(href="/eyenetAdmin/studentlist") Students
+                        a#sc.item(href="/eyenet/schedule") Schedule
+                    //dapat andito yung Equipments
+                
+    block content   
+    script.
+        $('.ui.accordion').accordion();
+        $('#butt').click
+            .sidebar('show')
+        ;

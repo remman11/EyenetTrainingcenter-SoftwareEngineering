@@ -1,0 +1,45 @@
+extends ../../../templates/baseh
+
+block body
+    section.wrrapNavbar
+        nav.navbar.navbar-default
+            div.container
+               <!-- Brand and toggle get grouped for better mobile display -->
+                div.navbar-header
+                    a.navbar-toogle.collapsed(type="button" data-toggle="collapse")
+                        span.sr-only Toogle Navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand Eye
+                        span Net
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                div#bs-example-navbar-collapse-1.collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li.active
+                            a(href="/eyenet/header") Home
+                            span.sr-only (current) 
+                        li
+                            a(href="/eyenet/about") About 
+                        li
+                            a(href="/eyenet/contact") Contact
+                        li
+                            a(href="/") Login
+    div#home.firstSection
+            <div id="wowslider-container1">
+                    <div class="ws_images"><ul>
+                        <li><img src="/assets/slider/data1/images/codex.jpg" alt="" title="" id="wows1_0"/></li>
+                        <li><img src="/assets/slider/data1/images/cybersec.jpg" alt="" title="" id="wows1_1"/></li>
+                        <li><img src="/assets/slider/data1/images/net.jpg" alt="" title="" id="wows1_2"/></li>
+                        <li><a href="http://wowslider.net"><img src="/assets/slider/data1/images/point.jpg" alt="html slider" title="" id="wows1_3"/></a></li>
+                        <li><img src="/assets/slider/data1/images/switches.jpg" alt="" title="" id="wows1_4"/></li>
+                    </ul></div>
+                    <div class="ws_shadow"></div>
+                    </div>	
+                    <script type="text/javascript" src="/assets/slider/engine1/wowslider.js"></script>
+                    <script type="text/javascript" src="/assets/sliderengine1/script.js"></script>
+    section#portfolio
+        div.ui.container
+            label.large.green.label Your Gateway to cyberworld
+    section#about
+    section#contact

@@ -1,0 +1,36 @@
+extends ../../../templates/eyenetbase
+
+block body 
+    div.cover   
+        div.ar
+            div.ui.center.aligned.container.sHeight2
+                b.center.aligned.fontLato.wTcolor.size.wShadow.height Eyenet Information System
+                h1.center.aligned.fontLato.wTcolor.wShadow.height3 Your Gateway To the Cyberworld
+            div.ui.center.aligned.container.height12
+                button#mod.button.ui.green.massive.button.mg(type="button") Login
+                button.button.ui.green.massive.button.mg(href="/eyenet/signup") Signup
+            div.ui.mini.modal.lheight()
+                i#close.circular.inverted.red.close.icon
+                form.ui.fluid.form.marga.exB.indent(method="POST" action="/login")
+                    img.ui.centered.small.image(src="/assets/Faculty/eyenettext.png")
+                    div.ui.container.you 
+                        div.center.aligned.paddingzxc
+                            i.circular.huge.users.icon
+                    div.field.pd
+                        label.large.white Username
+                        input(type="text" name="username" placeholder="Username")
+                    div.field
+                        label.ui.teal Password
+                    div.field
+                        input(type="password" name="password")
+                    div.ui.tw
+                        button.ui.blue.button.fluid.field(type="submit" value="Login")
+                            i.sign.in.icon 
+                            p Login
+            script.
+                    $('.ui.modal')
+                        .modal('attach events','#mod','show')
+                        .modal('attach events','#close','hide')
+                    ;
+
+                                       
