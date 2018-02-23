@@ -4,14 +4,22 @@ var db = require('../../lib/database')();
 var authMiddleware = require('../auth/middlewares/auth');
 var counter = require('../auth/middlewares/SC');
 
-router.get('/home',(req,res)=>{
+var aboutRouter = express.Router();
+var contactRouter = express.Router();
+var indexRouter = express.Router();
+var loginRouter = express.Router();
+
+indexRouter.get('/',(req,res)=>{
     res.render('eyenet/views/home');
 });
 
-router.get('/about',(req,res)=>{
+aboutRouter.get('/',(req,res)=>{
     res.render('eyenet/views/about');
 });
-router.get('/contact',(req,res)=>{
+contactRouter.get('/',(req,res)=>{
     res.render('eyenet/views/contact');
 });
-exports.eyenet = router;
+
+exports.home = indexRouter;
+exports.about = aboutRouter;
+exports.contact = contactRouter;

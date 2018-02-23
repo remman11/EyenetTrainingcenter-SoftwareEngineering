@@ -15,19 +15,36 @@ loginRouter.route('/')
         db.query(`SELECT * FROM tblaccount WHERE intAccountUsername="${req.body.username}"`, (err, results, fields) => {
             if (err) throw err;
             console.log(err);
+
             if (results.length === 0) 
             {
                 return res.redirect('/login?incorrect');
                 
             }
             var user = results[0];
-            if (user.strAccountPassword !== req.body.password) return res.redirect('/login?incorrect');
- 
-            delete user.strAccountPassword;
-
+            console.log(user);
             req.session.user = user;
+            
+            if(req.session.user.intAccountUserTypeID===1)
+            {
+                if (user.strAccountPassword !== req.body.password) return res.redirect('/login?incorrect');
 
-            return res.redirect('/eyenetAdmin/dashboard');
+                delete user.strAccountPassword;
+
+                req.session.user = user;
+
+                return res.redirect('/eyenetAdmin/dashboard');
+            }
+            else if(req.session.user.intAccountUserTypeID===2)
+            {
+                if (user.strAccountPassword !== req.body.password) return res.redirect('/login?incorrect');
+
+                delete user.strAccountPassword;
+
+                req.session.user = user;
+
+                return res.redirect('/eyenetUsers/dashboard');
+            }
         });
     });
 logoutRouter.get('/', (req, res) => {
