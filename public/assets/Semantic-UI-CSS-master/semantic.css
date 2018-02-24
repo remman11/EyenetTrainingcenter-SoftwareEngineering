@@ -15763,7 +15763,7 @@ ol.ui.horizontal.list li:before,
 .ui.vertical.segment {
   margin: 0em;
   padding-left: 0em;
-  padding-right: 0em;.he
+  padding-right: 0em;
   background: none transparent;
   border-radius: 0px;
   box-shadow: none;
@@ -37328,9 +37328,7 @@ bottom: 0px;
 {
   margin-left: 250px;
 }
-.rights{
-  margin-left: ;
-}
+
 .aright{
   margin-left: 180px;
 }
@@ -37451,6 +37449,9 @@ bottom: 0px;
 }
 .sHeight2{
   padding-top: 250px;
+}
+.sheight1p1{
+  padding-top: 120px;
 }
 .height12
 {

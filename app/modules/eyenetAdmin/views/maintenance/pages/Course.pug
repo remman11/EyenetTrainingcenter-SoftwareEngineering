@@ -1,0 +1,33 @@
+extends ../../../../../templates/eyenetAdmin 
+
+block content
+    div.ui.container
+        div.padl.padd.padb
+            div.ui.segment.eheight
+                div.ui.top.attached.large.inverted.green.label Course Type
+                a.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/course/new")
+                    i.add.icon
+                    |&nbsp; Add Course Type
+                div.paddd
+                table.ui.padded.table
+                    thead
+                        tr.single.line.center.aligned  
+                            th Name
+                            th Description
+                            th.four.wide Actions
+                    each user in users
+                        tr.center.aligned
+                            td=user.strCName
+                            td=user.strCDetails
+                            td.center.aligned
+                                a.item(href=`/eyenetAdmin/course/${user.intCID}`): i.black.big.edit.icon
+                                a.item(href=`/eyenetAdmin/course/${user.intCID}/delete`): i.black.big.remove.icon
+                            script.
+                                {
+                                    var eo = document.getElementById("main");
+                                    var et = document.getElementById("course");
+                                    var ee = document.getElementById("con1");
+                                    ee.classList.add("active")
+                                    eo.classList.add("active");
+                                    et.classList.add("active");
+                                }

@@ -24,12 +24,12 @@ block content
                                 tr
                                     td=user.datStartDate
                                     td=user.datEndDate
-                                    td=user.strSchedRemarks
+                                    td=user.strSRemarks
                                     td=user.strCourseName
                                     td.center.aligned
-                                        a.item(href=""): i.black.big.open.folder.outline.icon
-                                        a.item(href=""): i.black.big.edit.icon
-                                        a.item(href=""): i.black.big.remove.icon
+                                        a.item(href=`/scheduleList/:intSchedID/view`): i.black.big.open.folder.outline.icon
+                                        a.item(href=`/scheduleList/:intSchedID`): i.black.big.edit.icon
+                                        a.item(href=`/scheduleList/:intSchedID/delete`): i.black.big.remove.icon
                                     script.
                                         {
                                             var eo = document.getElementById("main");
