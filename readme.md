@@ -14,40 +14,41 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 - render page for Reports of Student List
 
 # 2. February 23, 2017 3:00:00 AM patch 2
-## Notes and BugFixes
+ `Notes and BugFixes`
 - Login Page can now Identify which User is logged in. 
 - fixed a bug where the system does not Identify the user. 
 
 # 3. February 24, 2017 9:13:00 PM patch 3
 
-## Additions
+`Additions`
 - added maintenance for status
 
-## Bugfixes
+`Bugfixes`
 - fixed a bug where the equipment type does not add
 - fixed a bug where the equipment type does not update when name is edited
 - fixed a bug where the maintenance forms does not display the item being edited
 - fixed a bug where the user dashboard does not determine the user logged in
 
-## Notes
+`Notes`
 - updated the database schema.
 - the admin module can now determine which active tab you are currently on 
 
 # 4. February 25, 2018 2:07:00AM patch 4
-## Additions 
+`Additions` 
 - added the course Maintenance
 - added the inquire page (guest can now inquire to the system)
 - added the proctor option when creating a Schedule 
 - added a dropdown option for course in create schedule (list of courses are now properly displayed)
 - added the proctors / professors Maintenance
-## Notes
+`Notes`
 - theres an unknown bug when adding and editing courseNames descriptions does not show.
 - theres an unknown bug that professor wont add to the database
 
 
 
-### apparently the system is still at 30% of the development phase as of February 24, 2018 9:17:00PM
+## apparently the system is still at 30% of the development phase as of February 24, 2018 9:17:00PM
 ### apparently the system is almost at 40% of the development phase as of February 25, 2018 3:00:00AM
-This should be the logs of the development process and shoud be the main reference for the progress percentage for the final Output.
 
-this should be added to the about page in the final phase.
+- (*This should be the logs of the development process and shoud be the main reference for the progress percentage for the final Output.*)
+
+- (*this should be added to the about page in the final phase.*)
