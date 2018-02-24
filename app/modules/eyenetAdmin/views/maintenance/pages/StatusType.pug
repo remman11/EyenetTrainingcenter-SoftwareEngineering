@@ -4,10 +4,10 @@ block content
     div.ui.container
         div.padl.padd.padb
             div.ui.segment.eheight
-                div.ui.top.attached.large.inverted.green.label User Maintenance
-                a.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/usertype/new")
+                div.ui.top.attached.large.inverted.green.label Status Maintenance
+                a.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/statustype/new")
                     i.add.icon
-                    |&nbsp; Add User Type
+                    |&nbsp; Add Status Type
                 div.paddd
                 table.ui.padded.table
                     thead
@@ -16,14 +16,14 @@ block content
                             th.four.wide Actions
                     each user in users
                         tr 
-                            td=user.strUTName 
+                            td=user.strStatusDesc
                             td.center.aligned
-                                a.item(href=`/eyenetAdmin/usertype/${user.intUserTypeID}`): i.black.big.edit.icon
-                                a.item(href=`/eyenetAdmin/usertype/${user.intUserTypeID}/delete`): i.black.big.remove.icon
+                                a.item(href=`/eyenetAdmin/statustype/${user.intStatusID}`): i.black.big.edit.icon
+                                a.item(href=`/eyenetAdmin/statustype/${user.intStatusID}/delete`): i.black.big.remove.icon
                             script.
                                 {
                                     var eo = document.getElementById("main");
-                                    var et = document.getElementById("user");
+                                    var et = document.getElementById("status");
                                     var ee = document.getElementById("con1");
                                     ee.classList.add("active")
                                     eo.classList.add("active");

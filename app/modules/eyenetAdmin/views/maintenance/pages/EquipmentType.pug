@@ -6,28 +6,26 @@ block content
             div.ui.segment.eheight
                 div.ui.top.attached.large.inverted.green.label Equipment Type
                 a.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/equiptype/new")
-                    i.large.setting.icon
+                    i.add.icon
                     |&nbsp; Add Equipment Type
                 div.paddd
-                div.ui.height2
-                    table.ui.celled.padded.table
-                        thead
-                            tr.single.line.center.aligned 
-                                th Name
-                                th.three.wide Actions
-                            each kick in kicks    
-                                tr
-                                    td=kick.strEquipTypeName 
-                                    td.center.aligned
-                                        a.item(href=`/eyenetAdmin/equiptype/${kick.intEquipTypeID}`): i.black.big.edit.icon
-                                        a.item(href=`/eyenetAdmin/equiptype/${kick.intEquipTypeID}/delete`): i.black.big.remove.icon
-                                    script.
-                                        {
-                                            var eo = document.getElementById("main");
-                                            var et = document.getElementById("equip");
-                                            var ee = document.getElementById("con1");
-                                            ee.classList.add("active")
-                                            eo.classList.add("active");
-                                            et.classList.add("active");
-                                        }
-                    
+                table.ui.padded.table
+                    thead
+                        tr.single.line.center.aligned  
+                            th Name
+                            th.four.wide Actions
+                    each user in users
+                        tr 
+                            td=user.strETName 
+                            td.center.aligned
+                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}`): i.black.big.edit.icon
+                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}/delete`): i.black.big.remove.icon
+                            script.
+                                {
+                                    var eo = document.getElementById("main");
+                                    var et = document.getElementById("equip");
+                                    var ee = document.getElementById("con1");
+                                    ee.classList.add("active")
+                                    eo.classList.add("active");
+                                    et.classList.add("active");
+                                }

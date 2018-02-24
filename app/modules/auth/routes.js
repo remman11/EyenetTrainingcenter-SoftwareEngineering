@@ -12,7 +12,7 @@ loginRouter.route('/')
     .post((req, res) => {
         var db = require('../../lib/database')();
 
-        db.query(`SELECT * FROM tblaccount WHERE intAccountUsername="${req.body.username}"`, (err, results, fields) => {
+        db.query(`SELECT * FROM tblaccount WHERE strAUsername="${req.body.username}"`, (err, results, fields) => {
             if (err) throw err;
             console.log(err);
 
@@ -25,25 +25,25 @@ loginRouter.route('/')
             console.log(user);
             req.session.user = user;
             
-            if(req.session.user.intAccountUserTypeID===1)
+            if(req.session.user.intAUserTypeID===1)
             {
-                if (user.strAccountPassword !== req.body.password) return res.redirect('/login?incorrect');
+                if (user.strAPassword !== req.body.password) return res.redirect('/login?incorrect');
 
-                delete user.strAccountPassword;
+                delete user.strAPassword;
 
                 req.session.user = user;
 
-                return res.redirect('/eyenetAdmin/dashboard');
+                return res.redirect(`/eyenetAdmin/dashboard`);
             }
-            else if(req.session.user.intAccountUserTypeID===2)
+            else if(req.session.user.intAUserTypeID===2)
             {
-                if (user.strAccountPassword !== req.body.password) return res.redirect('/login?incorrect');
+                if (user.strAPassword !== req.body.password) return res.redirect('/login?incorrect');
 
-                delete user.strAccountPassword;
+                delete user.strAPassword;
 
                 req.session.user = user;
 
-                return res.redirect('/eyenetUsers/dashboard');
+                return res.redirect(`/eyenetUsers/dashboard/"${req.session.user.strAUsername}"`);
             }
         });
     });
@@ -53,5 +53,7 @@ logoutRouter.get('/', (req, res) => {
         res.redirect('/login');
     });
 });
+
+
 exports.login = loginRouter;
 exports.logout = logoutRouter;      

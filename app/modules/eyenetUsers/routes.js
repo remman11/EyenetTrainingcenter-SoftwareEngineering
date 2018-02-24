@@ -4,13 +4,14 @@ var db = require('../../lib/database')();
 var authMiddleware = require('../auth/middlewares/auth');
 var counter = require('../auth/middlewares/SC');
 
-router.get(`/dashboard`,(req,res)=>{
-    var logs = req.session.user;
-    console.log('start dito',logs);
-    console.log('king ina dito sya nabobobo.');
-    db.query(`select * from tbluserinfo where intUserinfoID = "${logs.intAccountUserInfoID}"`,(err,results,field)=>{
-        return res.render('eyenetUsers/views/dashboard',{cats : results});
+function names(req,res,next){
+    db.query(`select * from tbluser where intUserID = "${req.session.user.intAUserID}"`,(err,results,field)=>{
+        req.names =  results;
+        return next();
     });
-    console.log('hindi sya bobo.'); 
-});
+}
+function renderDashboard(req,res){
+    res.render('eyenetUsers/views/dashboard',{cats: req.names})
+}
+router.get(`/dashboard/:strAUsername`,names,renderDashboard,(req,res)=>{});
 exports.eyenetUsers = router;

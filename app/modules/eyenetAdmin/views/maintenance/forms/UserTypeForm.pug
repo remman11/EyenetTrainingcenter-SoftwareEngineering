@@ -10,7 +10,7 @@ block content
                     form#form.ui.form.mleft(method="POST" action=`/eyenetAdmin/usertype${form ? `/${form.intUserTypeID}?_method=PUT`: '/new'}`)
                         div.ui.field
                             label.ui.large.teal.tag  Type Name
-                            input(type="text" name="etypename" value=form ? form.strUserTypeName : '')
+                            input(type="text" name="etypename" value=form ? form.strUTName : '')
                         if(!form)
                             div.ui.field
                                 input(type="hidden" name="smid" value=ID)
