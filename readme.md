@@ -4,7 +4,7 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 
 # Software Updates
 
-# 1. February 22, 2017  (7:30:00 PM) - added three modules  Patch 1
+## 1. February 22, 2017  (7:30:00 PM) - added three modules  Patch 1
 - A. eyenet
 - B. eyenetAdmin
 - C. eyenetUsers
@@ -13,12 +13,12 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 - working CRUD for Schedule Type
 - render page for Reports of Student List
 
-# 2. February 23, 2017 3:00:00 AM patch 2
- `Notes and BugFixes`
+## 2. February 23, 2017 3:00:00 AM patch 2
+`Notes and BugFixes`
 - Login Page can now Identify which User is logged in. 
 - fixed a bug where the system does not Identify the user. 
 
-# 3. February 24, 2017 9:13:00 PM patch 3
+## 3. February 24, 2017 9:13:00 PM patch 3
 
 `Additions`
 - added maintenance for status
@@ -33,7 +33,7 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 - updated the database schema.
 - the admin module can now determine which active tab you are currently on 
 
-# 4. February 25, 2018 2:07:00AM patch 4
+## 4. February 25, 2018 2:07:00AM patch 4
 `Additions` 
 - added the course Maintenance
 - added the inquire page (guest can now inquire to the system)
@@ -44,10 +44,28 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 - theres an unknown bug when adding and editing courseNames descriptions does not show.
 - theres an unknown bug that professor wont add to the database
 
+## 5. February 25, 2018 10:07:00AM patch 5
+`Additions` 
+- added the activities maintenance
+`Bugfixes`
+- [x] fixed a bug where the equipment does not properly delete
+- [x] fixed a bug where the course Description cannot add
+- [x] fixed a bug where the course Description wont Display
+- [x] fixed a bug where the course created won't add
+- [x] fixed a bug where the course selected won't properly delete
+- [x] fixed a bug where the created professors wont add to the database
+- [x] fixed a bug where the deletion of professors falsely redirects to the usertype page
+- [x] fixed a bug where the edit function of status does not apply the changes.  
+`Notes`
+- [] when you clicked the actions on the Schedule list theres no page being rendered
 
 
-## apparently the system is still at 30% of the development phase as of February 24, 2018 9:17:00PM
-### apparently the system is almost at 40% of the development phase as of February 25, 2018 3:00:00AM
+##### apparently the system is still at 30% of the development phase as of February 24, 2018 9:17:00PM
+
+##### apparently the system is almost at 40% of the development phase as of February 25, 2018 3:00:00AM
+
+##### ngayon ko lang narealize na karamihan sa transaction ay maintenance pocha.
+
 
 - (*This should be the logs of the development process and shoud be the main reference for the progress percentage for the final Output.*)
 
