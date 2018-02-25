@@ -34,20 +34,20 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 - the admin module can now determine which active tab you are currently on 
 
 ## 4. February 25, 2018 2:07:00AM patch 4
-`Additions` 
+- `Additions` 
 - added the course Maintenance
 - added the inquire page (guest can now inquire to the system)
 - added the proctor option when creating a Schedule 
 - added a dropdown option for course in create schedule (list of courses are now properly displayed)
 - added the proctors / professors Maintenance
-`Notes`
+- `Notes`
 - theres an unknown bug when adding and editing courseNames descriptions does not show.
 - theres an unknown bug that professor wont add to the database
 
 ## 5. February 25, 2018 10:07:00AM patch 5
-`Additions` 
+- `Additions` 
 - added the activities maintenance
-`Bugfixes`
+- `Bugfixes`
 - [x] fixed a bug where the equipment does not properly delete
 - [x] fixed a bug where the course Description cannot add
 - [x] fixed a bug where the course Description wont Display
@@ -56,9 +56,13 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 - [x] fixed a bug where the created professors wont add to the database
 - [x] fixed a bug where the deletion of professors falsely redirects to the usertype page
 - [x] fixed a bug where the edit function of status does not apply the changes.  
-`Notes`
-- [] when you clicked the actions on the Schedule list theres no page being rendered
+- `Notes`
+- [ ] when you clicked the actions on the Schedule list theres no page being rendered
 
+
+
+
+# !Important
 
 ##### apparently the system is still at 30% of the development phase as of February 24, 2018 9:17:00PM
 
