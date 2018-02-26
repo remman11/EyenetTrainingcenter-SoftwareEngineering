@@ -16,13 +16,14 @@ block body
             div#dash.item
                 a.title(href="/eyenetAdmin/dashboard") Dashboard
             div#main.item
-                div.title Maintenance
+                div.title#maint Maintenance
                     i.dropdown.icon
                 div#con1.content
                     div.vertical.menu
                         a#activity.item(href="/eyenetAdmin/activities") Activities
                         a#course.item(href="/eyenetAdmin/course") Course
                         a#equip.item(href="/eyenetAdmin/equiptype") Equipment Types
+                        a#payment.item(href="/eyenetAdmin/paymentType") Payment Status
                         a#proctor.item(href="/eyenetAdmin/proctors") Proctors / Professors
                         a#sched.item(href="/eyenetAdmin/scheduleList") Schedule      
                         a#status.item(href="/eyenetAdmin/statustype") Status Type
@@ -32,8 +33,13 @@ block body
                     i.dropdown.icon
                 div#con2.content
                     div.vertical.menu   
-                        a.item(href="/eyenetAdmin/maintenance/reservations") Reservations
-                        a.item(href="") Enrollment Requests  
+                        a.item(href="/eyenetAdmin/maintenance/reservations") Inquiries
+                        a.item(href="") Assign Activities
+                        a.item(href="") Document Requests
+                        a.item(href="") Enrollment
+                        a.item(href="") Payments
+                        a.item(href="") Students
+                        
             div#reports.item
                 div.title Reports
                     i.dropdown.icon

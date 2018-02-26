@@ -45,9 +45,10 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 - theres an unknown bug that professor wont add to the database
 
 ## 5. February 25, 2018 10:07:00AM patch 5
-- `Additions` 
+`Additions` 
 - added the activities maintenance
-- `Bugfixes`
+
+`Bugfixes`
 - [x] fixed a bug where the equipment does not properly delete
 - [x] fixed a bug where the course Description cannot add
 - [x] fixed a bug where the course Description wont Display
@@ -56,11 +57,16 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 - [x] fixed a bug where the created professors wont add to the database
 - [x] fixed a bug where the deletion of professors falsely redirects to the usertype page
 - [x] fixed a bug where the edit function of status does not apply the changes.  
-- `Notes`
+
+`Notes`
 - [ ] when you clicked the actions on the Schedule list theres no page being rendered
 
+## 6. February 26, 2018 10:32:00AM patch 6
+`Additions`
+- added the payment type maintenance
 
-
+`Bugfixes`
+- [x] fixed a bug where the maintenance dropdown icon doesn't get active when clicked
 
 # !Important
 

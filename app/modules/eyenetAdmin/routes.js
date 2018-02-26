@@ -13,6 +13,61 @@ router.get('/dashboard',(req,res)=>{
     res.render('eyenetAdmin/views/dashboard');
 });
 
+// dito magsisimula ang lahat ng kababalaghan sa program na ito.
+
+//안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+
+// activities maintenance interface backend
+
+router.get('/activities',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`select * from tblactivities`,(err,results,field)=>{
+        return res.render('eyenetAdmin/views/maintenance/pages/Activities',{users : results});
+        console.log(results);    
+    })  
+});
+router.get('/activities/new',(req,res)=>{
+    db.query(`select max(intActID) as intActID from tblactivities`,(err,results,field)=>{
+        res.locals.ID = results[0].intActID
+        return res.render('eyenetAdmin/views/maintenance/forms/ActivitiesForm');
+    }) 
+});
+router.post('/activities/new',(req,res)=>{
+    var nID = counter.smart(req.body.smid);
+    db.query(`insert into tblactivities (intActID,strActDesc) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        return res.redirect('/eyenetAdmin/activities');
+    }) 
+});
+router.get('/activities/:intActID',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`SELECT * FROM tblactivities where intActID = "${req.params.intActID}"`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        if(results[0]==null) res.redirect('/eyenetAdmin/activities');
+        res.render('eyenetAdmin/views/maintenance/forms/ActivitiesForm',{form : results[0] });
+    })
+});
+
+router.put('/activities/:intActID',(req,res)=>{
+    db.query(`update tblactivities set
+    strActDesc = "${req.body.etypename}"
+    where intActID = "${req.params.intActID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/activities');
+    })
+});
+
+router.get('/activities/:intActID/delete',(req,res)=>{
+    db.query(`DELETE FROM tblactivities WHERE intActID = "${req.params.intActID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/activities');
+    });
+});
+
+// end of activities
+
+// 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
+
 //안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
 
 // course maintenance interface backend
@@ -74,13 +129,9 @@ router.get('/course/:intCID/delete',(req,res)=>{
     });
 });
 
-
-
-
 //end of Course
 
 // 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
-
 
 //안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
 
@@ -135,108 +186,109 @@ router.get('/equiptype/:intEquipTypeID/delete',(req,res)=>{
 
 // 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
 
+// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
 
-//안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+// payment status maintenance interface backend
 
-// usertype Interface
-
-router.get('/usertype',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`select * from tblusertype`,(err,results,field)=>{
-        return res.render('eyenetAdmin/views/maintenance/pages/UserType',{users : results});
+router.get('/paymentType',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`select * from tblpaytype`,(err,results,field)=>{
+        return res.render('eyenetAdmin/views/maintenance/pages/PaymentType',{users : results});
         console.log(results);    
     })  
 });
-router.get('/usertype/new',(req,res)=>{
-    db.query(`select max(intUserTypeID) as intUserTypeID from tblusertype`,(err,results,field)=>{
-        res.locals.ID = results[0].intUserTypeID
-        return res.render('eyenetAdmin/views/maintenance/forms/UserTypeForm');
+router.get('/paymentType/new',(req,res)=>{
+    db.query(`select max(intPayTypeID) as intPayTypeID from tblpaytype`,(err,results,field)=>{
+        res.locals.ID = results[0].intPayTypeID
+        return res.render('eyenetAdmin/views/maintenance/forms/PaymentTypeForm');
     }) 
 });
-router.post('/usertype/new',(req,res)=>{
+router.post('/paymentType/new',(req,res)=>{
     var nID = counter.smart(req.body.smid);
-    db.query(`insert into tblusertype (intUserTypeID,strUTName) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
+    db.query(`insert into tblpaytype (intPayTypeID,strPayTypeName) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
         if(err) throw err;
         console.log(err);
-        return res.redirect('/eyenetAdmin/usertype');
+        return res.redirect('/eyenetAdmin/paymentType');
     }) 
 });
-router.get('/usertype/:intUserTypeID',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`SELECT * FROM tblusertype where intUserTypeID =  "${req.params.intUserTypeID}"`,(err,results,field)=>{
+router.get('/paymentType/:intPayTypeID',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`SELECT * FROM tblpaytype where intPayTypeID = "${req.params.intPayTypeID}"`,(err,results,field)=>{
         if(err) throw err;
         console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/usertype');
-        res.render('eyenetAdmin/views/maintenance/forms/UserTypeForm',{form : results[0] });
+        if(results[0]==null) res.redirect('/eyenetAdmin/paymentType');
+        res.render('eyenetAdmin/views/maintenance/forms/PaymentTypeForm',{form : results[0] });
     })
 });
 
-router.put('/usertype/:intUserTypeID',(req,res)=>{
-    db.query(`update tblusertype set
-    strUTName = "${req.body.etypename}"
-    where intUserTypeID = "${req.params.intUserTypeID}"`,(err,results,field)=>{
+router.put('/paymentType/:intPayTypeID',(req,res)=>{
+    db.query(`update tblpaytype set
+    strPayTypeName = "${req.body.etypename}"
+    where intPayTypeID = "${req.params.intPayTypeID}"`,(err,results,field)=>{
         if(err) throw err;
-        res.redirect('/eyenetAdmin/usertype');
+        res.redirect('/eyenetAdmin/paymentType');
     })
 });
 
-router.get('/usertype/:intUserTypeID/delete',(req,res)=>{
-    db.query(`DELETE FROM tblusertype WHERE intUserTypeID = "${req.params.intUserTypeID}"`,(err,results,field)=>{
+router.get('/paymentType/:intPayTypeID/delete',(req,res)=>{
+    db.query(`DELETE FROM tblpaytype WHERE intPayTypeID = "${req.params.intPayTypeID}"`,(err,results,field)=>{
         if(err) throw err;
-        res.redirect('/eyenetAdmin/usertype');
+        res.redirect('/eyenetAdmin/paymentType');
     });
 });
 
-// end of usertype
+// payment status end
 
 // 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
 
 // 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
 
-//status Type
+// proctor maintenance interface backend
 
-router.get('/statustype',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`select * from tblstatus`,(err,results,field)=>{
-        return res.render('eyenetAdmin/views/maintenance/pages/StatusType',{users : results});
+router.get('/proctors',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`select * from tblproctor`,(err,results,field)=>{
+        return res.render('eyenetAdmin/views/maintenance/pages/Proctor',{users : results});
         console.log(results);    
     })  
 });
-router.get('/statustype/new',(req,res)=>{
-    db.query(`select max(intStatusID) as intStatusID from tblstatus`,(err,results,field)=>{
-        res.locals.ID = results[0].intStatusID
-        return res.render('eyenetAdmin/views/maintenance/forms/StatusTypeForm');
+router.get('/proctors/new',(req,res)=>{
+    db.query(`select max(intProctorID) as intProctorID from tblproctor`,(err,results,field)=>{
+        res.locals.ID = results[0].intProctorID
+        return res.render('eyenetAdmin/views/maintenance/forms/ProctorForm');
     }) 
 });
-router.post('/statustype/new',(req,res)=>{
+router.post('/proctors/new',(req,res)=>{
     var nID = counter.smart(req.body.smid);
-    db.query(`insert into tblstatus (intStatusID,strStatusDesc) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
+    db.query(`insert into tblproctor (intProctorID,strProctorName) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
         if(err) throw err;
         console.log(err);
-        return res.redirect('/eyenetAdmin/statustype');
+        return res.redirect('/eyenetAdmin/proctors');
     }) 
 });
-router.get('/statustype/:intStatusID',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`SELECT * FROM tblstatus where intStatusID =  "${req.params.intStatusID}"`,(err,results,field)=>{
+router.get('/proctors/:intProctorID',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`SELECT * FROM tblproctor where intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
         if(err) throw err;
         console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/statustype');
-        res.render('eyenetAdmin/views/maintenance/forms/StatusTypeForm',{form : results[0] });
+        if(results[0]==null) res.redirect('/eyenetAdmin/proctors');
+        res.render('eyenetAdmin/views/maintenance/forms/ProctorForm',{form : results[0] });
     })
 });
 
-router.put('/statustype/:intStatusID',(req,res)=>{
-    db.query(`update tblstatus set
-    strStatusDesc = "${req.body.etypename}"
-    where intStatusID = "${req.params.intStatusID}"`,(err,results,field)=>{
+router.put('/proctors/:intProctorID',(req,res)=>{
+    db.query(`update tblproctor set
+    strProctorName = "${req.body.etypename}"
+    where intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
         if(err) throw err;
-        res.redirect('/eyenetAdmin/statustype');
+        res.redirect('/eyenetAdmin/proctors');
     })
 });
 
-router.get('/statustype/:intStatusID/delete',(req,res)=>{
-    db.query(`DELETE FROM tblstatus WHERE intStatusID = "${req.params.intStatusID}"`,(err,results,field)=>{
+router.get('/proctors/:intProctorID/delete',(req,res)=>{
+    db.query(`DELETE FROM tblproctor WHERE intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
         if(err) throw err;
-        res.redirect('/eyenetAdmin/statustype');
+        res.redirect('/eyenetAdmin/proctors');
     });
 });
+
+// end of proctor
 
 // 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
 
@@ -301,7 +353,111 @@ router.post('/newsched',(req,res)=>{
 });
 
 //end Schedule
- 
+
+// 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
+
+// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+
+//status Type interface backend 
+
+router.get('/statustype',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`select * from tblstatus`,(err,results,field)=>{
+        return res.render('eyenetAdmin/views/maintenance/pages/StatusType',{users : results});
+        console.log(results);    
+    })  
+});
+router.get('/statustype/new',(req,res)=>{
+    db.query(`select max(intStatusID) as intStatusID from tblstatus`,(err,results,field)=>{
+        res.locals.ID = results[0].intStatusID
+        return res.render('eyenetAdmin/views/maintenance/forms/StatusTypeForm');
+    }) 
+});
+router.post('/statustype/new',(req,res)=>{
+    var nID = counter.smart(req.body.smid);
+    db.query(`insert into tblstatus (intStatusID,strStatusDesc) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        return res.redirect('/eyenetAdmin/statustype');
+    }) 
+});
+router.get('/statustype/:intStatusID',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`SELECT * FROM tblstatus where intStatusID =  "${req.params.intStatusID}"`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        if(results[0]==null) res.redirect('/eyenetAdmin/statustype');
+        res.render('eyenetAdmin/views/maintenance/forms/StatusTypeForm',{form : results[0] });
+    })
+});
+
+router.put('/statustype/:intStatusID',(req,res)=>{
+    db.query(`update tblstatus set
+    strStatusDesc = "${req.body.etypename}"
+    where intStatusID = "${req.params.intStatusID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/statustype');
+    })
+});
+
+router.get('/statustype/:intStatusID/delete',(req,res)=>{
+    db.query(`DELETE FROM tblstatus WHERE intStatusID = "${req.params.intStatusID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/statustype');
+    });
+});
+
+// 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
+
+// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+
+// usertype Interface
+
+router.get('/usertype',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`select * from tblusertype`,(err,results,field)=>{
+        return res.render('eyenetAdmin/views/maintenance/pages/UserType',{users : results});
+        console.log(results);    
+    })  
+});
+router.get('/usertype/new',(req,res)=>{
+    db.query(`select max(intUserTypeID) as intUserTypeID from tblusertype`,(err,results,field)=>{
+        res.locals.ID = results[0].intUserTypeID
+        return res.render('eyenetAdmin/views/maintenance/forms/UserTypeForm');
+    }) 
+});
+router.post('/usertype/new',(req,res)=>{
+    var nID = counter.smart(req.body.smid);
+    db.query(`insert into tblusertype (intUserTypeID,strUTName) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        return res.redirect('/eyenetAdmin/usertype');
+    }) 
+});
+router.get('/usertype/:intUserTypeID',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`SELECT * FROM tblusertype where intUserTypeID =  "${req.params.intUserTypeID}"`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        if(results[0]==null) res.redirect('/eyenetAdmin/usertype');
+        res.render('eyenetAdmin/views/maintenance/forms/UserTypeForm',{form : results[0] });
+    })
+});
+
+router.put('/usertype/:intUserTypeID',(req,res)=>{
+    db.query(`update tblusertype set
+    strUTName = "${req.body.etypename}"
+    where intUserTypeID = "${req.params.intUserTypeID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/usertype');
+    })
+});
+
+router.get('/usertype/:intUserTypeID/delete',(req,res)=>{
+    db.query(`DELETE FROM tblusertype WHERE intUserTypeID = "${req.params.intUserTypeID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/usertype');
+    });
+});
+
+// end of usertype
+
 // 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
 
 // 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
@@ -313,108 +469,5 @@ router.get('/studentList',(req,res)=>{
 });
 
 // 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
-
-// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
-
-// proctor maintenance interface backend
-
-router.get('/proctors',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`select * from tblproctor`,(err,results,field)=>{
-        return res.render('eyenetAdmin/views/maintenance/pages/Proctor',{users : results});
-        console.log(results);    
-    })  
-});
-router.get('/proctors/new',(req,res)=>{
-    db.query(`select max(intProctorID) as intProctorID from tblproctor`,(err,results,field)=>{
-        res.locals.ID = results[0].intProctorID
-        return res.render('eyenetAdmin/views/maintenance/forms/ProctorForm');
-    }) 
-});
-router.post('/proctors/new',(req,res)=>{
-    var nID = counter.smart(req.body.smid);
-    db.query(`insert into tblproctor (intProctorID,strProctorName) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        return res.redirect('/eyenetAdmin/proctors');
-    }) 
-});
-router.get('/proctors/:intProctorID',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`SELECT * FROM tblproctor where intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/proctors');
-        res.render('eyenetAdmin/views/maintenance/forms/ProctorForm',{form : results[0] });
-    })
-});
-
-router.put('/proctors/:intProctorID',(req,res)=>{
-    db.query(`update tblproctor set
-    strProctorName = "${req.body.etypename}"
-    where intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
-        if(err) throw err;
-        res.redirect('/eyenetAdmin/proctors');
-    })
-});
-
-router.get('/proctors/:intProctorID/delete',(req,res)=>{
-    db.query(`DELETE FROM tblproctor WHERE intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
-        if(err) throw err;
-        res.redirect('/eyenetAdmin/proctors');
-    });
-});
-
-// end of proctor
-
-// 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
-
-// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
-
-// activities
-
-router.get('/activities',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`select * from tblactivities`,(err,results,field)=>{
-        return res.render('eyenetAdmin/views/maintenance/pages/Activities',{users : results});
-        console.log(results);    
-    })  
-});
-router.get('/activities/new',(req,res)=>{
-    db.query(`select max(intActID) as intActID from tblactivities`,(err,results,field)=>{
-        res.locals.ID = results[0].intActID
-        return res.render('eyenetAdmin/views/maintenance/forms/ActivitiesForm');
-    }) 
-});
-router.post('/activities/new',(req,res)=>{
-    var nID = counter.smart(req.body.smid);
-    db.query(`insert into tblactivities (intActID,strActDesc) VALUES ("${nID}","${req.body.etypename}");`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        return res.redirect('/eyenetAdmin/activities');
-    }) 
-});
-router.get('/activities/:intActID',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`SELECT * FROM tblactivities where intActID = "${req.params.intActID}"`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/activities');
-        res.render('eyenetAdmin/views/maintenance/forms/ActivitiesForm',{form : results[0] });
-    })
-});
-
-router.put('/activities/:intActID',(req,res)=>{
-    db.query(`update tblactivities set
-    strActDesc = "${req.body.etypename}"
-    where intActID = "${req.params.intActID}"`,(err,results,field)=>{
-        if(err) throw err;
-        res.redirect('/eyenetAdmin/activities');
-    })
-});
-
-router.get('/activities/:intActID/delete',(req,res)=>{
-    db.query(`DELETE FROM tblactivities WHERE intActID = "${req.params.intActID}"`,(err,results,field)=>{
-        if(err) throw err;
-        res.redirect('/eyenetAdmin/activities');
-    });
-});
-
 
 exports.eyenetAdmin = router;
