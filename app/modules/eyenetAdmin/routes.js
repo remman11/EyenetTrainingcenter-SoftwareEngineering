@@ -312,24 +312,58 @@ function renderSchedpage(req,res){
     res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{nips : req.fields, tips : req.proctors, lips : req.courses});
 }
 
+function schedList(req,res,next){
+    db.query(`select * from tblschedlist`,(err,resul,fields)=>{
+        req.lists = resul;
+        return next();
+    });
+}
+function renderSchedList(req,res){
+    res.render(`eyenetAdmin/views/maintenance/pages/schedView`,{lists :req.lists});
+}
+
 router.get('/createSchedule',authMiddleware.hasAuth,status,proctor,course,renderSchedpage);
+
 router.get('/scheduleList',authMiddleware.hasAuth,course);
 
 router.get('/scheduleList',(req,res)=>{
-    db.query(`select * from tblsched`,(err,results,field)=>{
+    db.query(`select * from tblschedlist`,(err,results,field)=>{
         return res.render('eyenetAdmin/views/maintenance/pages/schedule',{users : results});
         console.log(results);  
     })
 });
 
-router.get('/scheduleList/:intSchedID/view',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`SELECT * FROM tblusertype where intUserTypeID =  "${req.params.intUserTypeID}"`,(err,results,field)=>{
+router.get('/scheduleList/:intSchedID/view',authMiddleware.hasAuth,schedList,(req,res)=>{
+    db.query(`SELECT * FROM tblschedlist where intSchedID = "${req.params.intSchedID}"`,(err,results,field)=>{
         if(err) throw err;
         console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/usertype');
-        res.render('eyenetAdmin/views/maintenance/forms/UserTypeForm',{form : results[0] });
+        if(results[0]==null) res.redirect('/eyenetAdmin/scheduleList');
+        res.render('eyenetAdmin/views/maintenance/pages/schedView',{form : results[0] });
     })
 }); 
+
+router.get('/scheduleList/:intSchedID/edit',authMiddleware.hasAuth,renderSchedpage,(req,res)=>{
+    db.query(`SELECT * FROM tblsched where intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        if(results[0]==null) res.redirect('/eyenetAdmin/schedList');
+        res.render('eyenetAdmin/views/maintenance/forms/ScheduleForm',{form : results[0] });
+    })
+});
+
+router.put('/scheduleList/:intSchedID/edit',(req,res)=>{
+    db.query(`update tblsched set
+    datStartDate = "${req.body.dstart}",
+    datEndDate = "${req.body.dend}",
+    strSRemarks = "${req.body.rem}",
+    intSCourseID = "${req.body.scourse}"
+    intSStatusID = "${req.body.stats}"
+    intProctorID = "${req.body}" 
+    where intSchedID = "${req.params.intSchedID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/proctors');
+    })
+});
 
 router.post('/newsched',(req,res)=>{
     
@@ -469,5 +503,47 @@ router.get('/studentList',(req,res)=>{
 });
 
 // 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
+
+//
+
+// transactions transactions transactions transactions transactions transactions transactions transactions transactions transactions transactions transactions
+
+//
+
+// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+
+// inquiries
+
+router.get('/inquiries',(req,res)=>{
+    db.query(`select * from tblinquiry`,(err,results,field)=>{
+        return res.render('eyenetAdmin/views/transactions/pages/inquiries',{users : results});
+        console.log(results);  
+    })
+});
+
+router.get('/inquiries/:intUserTypeID',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`SELECT * FROM tblinquiry where intInquiryID = "${req.params.intInquiryID}"`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        if(results[0]==null) res.redirect('/eyenetAdmin/inquiries');
+        res.render('eyenetAdmin/views/transactions/pages/inquiryView',{form : results[0]});
+    })
+});
+
+router.put('/inquiries/:intUserTypeID',(req,res)=>{
+    db.query(`update tblusertype set
+    strUTName = "${req.body.etypename}"
+    where intUserTypeID = "${req.params.intUserTypeID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/usertype');
+    })
+});
+
+router.get('/inquiries/:intUserTypeID/delete',(req,res)=>{
+    db.query(`DELETE FROM tblusertype WHERE intUserTypeID = "${req.params.intUserTypeID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect('/eyenetAdmin/usertype');
+    });
+});
 
 exports.eyenetAdmin = router;

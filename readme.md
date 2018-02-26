@@ -1,48 +1,34 @@
 # Eyenet Training Center Information System
-A web-based application software for The Eyenet Training Center
-In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
+##### A web-based application software for The Eyenet Training Center
+##### In partial Fulfillment for: `COMP 3033 Software Engineering (Final Project)
 
 # Software Updates
 
-## 1. February 22, 2017  (7:30:00 PM) - added three modules  Patch 1
-- A. eyenet
-- B. eyenetAdmin
-- C. eyenetUsers
-- working CRUD for Equipment Type
-- working CRUD for User Type
-- working CRUD for Schedule Type
-- render page for Reports of Student List
+#`New`
 
-## 2. February 23, 2017 3:00:00 AM patch 2
-`Notes and BugFixes`
-- Login Page can now Identify which User is logged in. 
-- fixed a bug where the system does not Identify the user. 
-
-## 3. February 24, 2017 9:13:00 PM patch 3
-
+## 7. February 26, 2018 6:45:00PM patch 7
 `Additions`
-- added maintenance for status
+- added the payment type maintenance
+`New`
+- added Assign Activities in transactions `tab only`
+- added Document Requests in transactions `tab only`
+- added Enrollment in transactions `tab only`
+- added Inquiries in transactions 
+- added Payments in transactions `tab only`
+- added Students in transactions `tab only`
+`Notes`
+##### Detected `Bugs`
+- [x] app crashes when pressing view in the schedule list 
+- [x] app crashes when pressing view in the Inquiries
+
+##### Apparently there's a whole lot of bugs in the transactions section 
+
+## 6. February 26, 2018 10:32:00AM patch 6
+`Additions`
+- added the payment type maintenance
 
 `Bugfixes`
-- fixed a bug where the equipment type does not add
-- fixed a bug where the equipment type does not update when name is edited
-- fixed a bug where the maintenance forms does not display the item being edited
-- fixed a bug where the user dashboard does not determine the user logged in
-
-`Notes`
-- updated the database schema.
-- the admin module can now determine which active tab you are currently on 
-
-## 4. February 25, 2018 2:07:00AM patch 4
-- `Additions` 
-- added the course Maintenance
-- added the inquire page (guest can now inquire to the system)
-- added the proctor option when creating a Schedule 
-- added a dropdown option for course in create schedule (list of courses are now properly displayed)
-- added the proctors / professors Maintenance
-- `Notes`
-- theres an unknown bug when adding and editing courseNames descriptions does not show.
-- theres an unknown bug that professor wont add to the database
+- [x] fixed a bug where the maintenance dropdown icon doesn't get active when clicked
 
 ## 5. February 25, 2018 10:07:00AM patch 5
 `Additions` 
@@ -61,12 +47,52 @@ In partial Fulfillment for: COMP 3033 Software Engineering (Final Project)
 `Notes`
 - [ ] when you clicked the actions on the Schedule list theres no page being rendered
 
-## 6. February 26, 2018 10:32:00AM patch 6
+## 4. February 25, 2018 2:07:00AM patch 4
+- `Additions` 
+- added the course Maintenance
+- added the inquire page (guest can now inquire to the system)
+- added the proctor option when creating a Schedule 
+- added a dropdown option for course in create schedule (list of courses are now properly displayed)
+- added the proctors / professors Maintenance
+- `Notes`
+- theres an unknown bug when adding and editing courseNames descriptions does not show.
+- theres an unknown bug that professor wont add to the database
+
+## 3. February 24, 2017 9:13:00 PM patch 3
+
 `Additions`
-- added the payment type maintenance
+- added maintenance for status
 
 `Bugfixes`
-- [x] fixed a bug where the maintenance dropdown icon doesn't get active when clicked
+- fixed a bug where the equipment type does not add
+- fixed a bug where the equipment type does not update when name is edited
+- fixed a bug where the maintenance forms does not display the item being edited
+- fixed a bug where the user dashboard does not determine the user logged in
+
+`Notes`
+- updated the database schema.
+- the admin module can now determine which active tab you are currently on 
+
+## 2. February 23, 2017 3:00:00 AM patch 2
+`Notes and BugFixes`
+- Login Page can now Identify which User is logged in. 
+- fixed a bug where the system does not Identify the user.
+
+
+## 1. February 22, 2017  (7:30:00 PM) - added three modules  Patch 1
+- A. eyenet
+- B. eyenetAdmin
+- C. eyenetUsers
+- working CRUD for Equipment Type
+- working CRUD for User Type
+- working CRUD for Schedule Type
+- render page for Reports of Student List
+
+
+
+
+
+
 
 # !Important
 

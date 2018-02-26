@@ -1,0 +1,10 @@
+extends ../../../../../templates/eyenetAdmin 
+    
+block content
+    div.ui.container
+        div.padl.padd.padb
+            div.ui.segment.eheight
+                div.ui.ribbon.label.big.inverted.blue 
+                    p #{form ? 'Edit' : 'Add'} Status Type
+                div.ui.field
+                    input(type="hidden" name="smid" value=ID)
