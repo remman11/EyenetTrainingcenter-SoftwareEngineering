@@ -4,18 +4,19 @@
 
 # Software Updates
 
-#`New`
+# `New`
 
 ## 7. February 26, 2018 6:45:00PM patch 7
 `Additions`
 - added the payment type maintenance
-`New`
-- added Assign Activities in transactions `tab only`
-- added Document Requests in transactions `tab only`
-- added Enrollment in transactions `tab only`
-- added Inquiries in transactions 
-- added Payments in transactions `tab only`
-- added Students in transactions `tab only`
+-`New`
+- `tab only`added Assign Activities in transactions 
+- `tab only`added Document Requests in transactions 
+- `tab only`added Enrollment in transactions 
+- `tab only`added Inquiries in transactions 
+- `tab only`added Payments in transactions 
+- `tab only`added Students in transactions 
+
 `Notes`
 ##### Detected `Bugs`
 - [x] app crashes when pressing view in the schedule list 
