@@ -12,6 +12,9 @@
 .ic{
     color:black;
 }
+.ic:hover{
+    color: white;
+}
 .inqtitle{
     color:white;
     font-size:24px;
