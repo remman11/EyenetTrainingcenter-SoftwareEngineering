@@ -1,0 +1,127 @@
+html
+	head
+		title Contact Us
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css')
+		link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.css')
+		link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+		link(rel='stylesheet' href='style.css')
+		script(defer='' src='https://use.fontawesome.com/releases/v5.0.6/js/all.js')
+		script(defer='' src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.js')
+		script(defer='',src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js')
+		script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+		script(src='validation.js')
+	body
+		.jumbotron.text-center
+			.container
+				h2.display-4 CONTACT US
+				p.lead
+			br
+			br
+			.ui.three.column.grid.container.center.aligned
+				.column
+					h3.ui.icon.header
+						.circular.icon
+							button.btn.btn-circle.btn-lg.bcollapse(type='button', data-toggle='collapse', data-target='#loc', aria-expanded='false', aria-controls='collapseExample')
+								span.fa-stack.fa-4x
+									i.fa.fa-circle.fa-stack-2x.icc
+									i.fa.fa-map-marker-alt.fa-stack-1x.ic
+						.inqtitle
+							| ADDRESS
+						br
+						#loc.collapse
+							.center.aligned.det
+								p.subt Main Office
+								p #92 3rd Floor AMO Bldg.
+								p New York Ave
+								p Brgy. E. Rodriguez Cubao
+								p Quezon City.
+				.column
+					h3.ui.icon.header
+						button.btn.btn-default.btn-circle.btn-lg.bcollapse(type='button', data-toggle='collapse', data-target='#phone', aria-expanded='false', aria-controls='collapseExample')
+							span.fa-stack.fa-4x
+								i.fa.fa-circle.fa-stack-2x.icc
+								i.fa.fa-phone.fa-stack-1x.ic
+						br
+						.inqtitle
+							| CONTACTS
+						br
+						#phone.collapse
+							.center.aligned
+								.center.aligned.det
+									p.subt Main Office Contacts
+									p Landline: 440-4089
+									p Globe: 0995-988-28-94 
+									p Globe: 0915-539-41-61
+									p Smart: 0908-988-99-82
+				.column
+					h3.ui.icon.header
+						button.btn.btn-default.btn-circle.btn-lg.bcollapse(type='button', data-toggle='collapse', data-target='#email', aria-expanded='false', aria-controls='collapseExample')
+							span.fa-stack.fa-4x
+								i.fa.fa-circle.fa-stack-2x.icc
+								i.fa.fa-envelope.fa-stack-1x.ic
+						br
+						.inqtitle
+							| EMAIL
+						br
+						#email.collapse
+							.center.aligned
+								.center.aligned.det
+									p.subt Main Office Email Address
+									p eye.net_ittc@yahoo.com.ph
+		.ui.two.column.grid.container.centered
+			.column
+				h2.ui.icon.header
+					p.subh MESSAGE US
+					br
+					.description.centered
+						p.subp Don't be shy.
+						p.subp  Email us any questions or call the numbers above. 
+						p.subp Any questions are entertained so don't hesitate to ask!
+						br
+						br
+						br
+						br
+						a(href='https://www.facebook.com/eyenetrainingcenter')
+							img(src='eissub.png')
+			.column
+				form#val
+					.ui.one.column.grid.container
+						.column
+							label.subl(for='inqname') Full Name (optional)
+							.form-group
+								.ui.large.left.icon.input
+									input#inqname.form-control(type='text', name='inqname', size='70')
+									i.user.icon
+					.ui.two.column.grid.container
+						.column
+							label.subl(for='inqemail') *Email Address
+							.form-group
+								.ui.large.left.icon.input
+									input#inqemail.form-control(type='text', size='50')
+									i.envelope.icon
+						.column
+							label.subl(for='inqnum') *Mobile Number
+							.form-group
+								.ui.large.left.icon.input
+									input#inqnum.form-control(type='text', size='50')
+									i.mobile.icon
+					.ui.two.column.grid.container
+						.column
+							label.subl(for='inqsub') *Subject
+							.form-group
+								.ui.large.left.icon.input
+									input#inqsub.form-control(type='text', size='50')
+									i.book.icon
+					.ui.one.column.grid.container
+						.column
+							label.subl(for='inqmessage') *Message
+							.form-group
+								textarea#inqmessage.form-control.large(rows='6')
+								br
+								button.large.ui.animated.button.active(type='submit', tabindex='0')
+									#submit-btn.visible.content Submit
+									.hidden.content
+										i.right.arrow.icon

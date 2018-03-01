@@ -32,3 +32,23 @@
     font-size:18px;
     text-decoration: underline;
 }
+.subp{
+    font-size:22px;
+}
+.subh{
+    font-size:30px;
+}
+.subl{
+    font-size:15px;
+}
+.eislogo{
+    size:100px;
+}
+#inqmessage{
+    resize:none;
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+    
+    -webkit-appearance: none; 
+    margin: 0; 
+  }

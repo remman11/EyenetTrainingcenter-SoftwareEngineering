@@ -11,6 +11,9 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src ="validation.js"></script>
+
     </head>
 
         <body>
@@ -24,13 +27,14 @@
                 <div class="ui three column grid container center aligned">
                         <div class="column">
                                 <h3 class="ui icon header">
-                                    
+                                    <div class="circular icon">
                                     <button type="button" class="btn btn-circle btn-lg bcollapse" data-toggle="collapse" data-target="#loc" aria-expanded="false" aria-controls="collapseExample">
                                         <span class="fa-stack fa-4x"> 
                                             <i class="fa fa-circle fa-stack-2x icc"></i>
                                             <i class="fa fa-map-marker-alt fa-stack-1x ic"></i>
                                         </span>
                                     </button>
+                                    </div>
                                         <div class="inqtitle">
                                           ADDRESS
                                         </div>
@@ -99,60 +103,79 @@
                 </div>
                 <div class="ui two column grid container centered">
                     <div class="column">
-                        <h3 class="ui icon header ">
-                            <i class="far fa-question-circle"></i>
-                              MESSAGE US
-                            <br></br>
+                        <h2 class="ui icon header ">
+                              <p class = "subh">MESSAGE US</p>
+                            <br>
                             <div class="description centered">
-                                        <img src = "eislogo.png">
-                                        Don't be shy. Email us any questions or call the numbers above. Any questions are entertained so don't hesitate to ask!   
+                                <p class = "subp">Don't be shy.</p>
+                                <p class = "subp"> Email us any questions or call the numbers above. </p>
+                                <p class = "subp">Any questions are entertained so don't hesitate to ask!</p><br></br>
+                                <br></br>
+                                <a href = "https://www.facebook.com/eyenetrainingcenter"><img src = "eissub.png"></a>
                             </div>
-                        </h3>
-                        
+                        </h2>
                     </div>
                     <div class="column">
-                        <form>
+                        <form id = "val">
+                    <div class="ui one column grid container">
+                        <div class="column">
+                                <label for="inqname" class = "subl">Full Name (optional)</label>
+                            <div class="form-group">
+                                <div class="ui large left icon input">
+                                    <input type="text" class="form-control" id="inqname" name="inqname" size="70">
+                                    <i class="user icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="ui two column grid container">
                         <div class="column">
+                                <label for="inqemail" class = "subl">*Email Address</label>
                             <div class="form-group">
-                                <label for="inqname">Full Name (optional)</label>
-                                <input type="text" class="form-control" id="inqname">
+                                <div class="ui large left icon input">
+                                    <input type="text" class="form-control" id="inqemail" id="inqemail" size="50">
+                                    <i class="envelope icon"></i>
+                                </div>
                             </div>
                         </div>
                         <div class="column">
+                                <label for="inqnum" class = "subl">*Mobile Number</label>
                             <div class="form-group">
-                                <label for="inqemail">Email Address*</label>
-                                <input type="email" class="form-control" id="inqemail">
+                                <div class="ui large left icon input">
+                                    <input type="text" class="form-control" id="inqnum" id="inqnum"size="50">
+                                    <i class="mobile icon"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                         <div class="ui two column grid container">
                             <div class="column">
+                                    <label for="inqsub" class = "subl">*Subject</label>
                                 <div class="form-group">
-                                    <label for="inqsubject">Subject</label>
-                                    <input type="text" class="form-control" id="inqsubject">
+                                    <div class="ui large left icon input">
+                                        <input type="text" class="form-control" id="inqsub" id="inqsub" size="50">
+                                        <i class="book icon"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="ui one column grid container">
                             <div class="column">
+                                    <label for="inqmessage" class = "subl">*Message</label>
                                 <div class="form-group">
-                                    <label for="inqtextarea">Message*</label>
-                                    <textarea class="form-control" id="inqtextarea" rows="5"></textarea><br>
-                                    <button type = "submit" class="ui animated button" tabindex="0">
-                                        <div class="visible content">Submit</div>
+                                    <textarea class="form-control large" id="inqmessage" id="inqmessage" rows="6"></textarea><br>
+                                    <button type = "submit" class="large ui animated button active" tabindex="0">
+                                        
+                                        <div class="visible content" id = "submit-btn">Submit</div>
                                         <div class="hidden content">
                                         <i class="right arrow icon"></i>
                                         </button>
+                                        
                                 </div>
                             </div>
-                            
-                            
-                    
+                        </div>
                         </form>
                     </div>
                 </div>
-                 
-
         </body>
 </html>
