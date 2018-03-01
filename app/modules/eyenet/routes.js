@@ -17,11 +17,11 @@ indexRouter.get('/',(req,res)=>{
 aboutRouter.get('/',(req,res)=>{
     res.render('eyenet/views/about');
 });
-contactRouter.get('/',(req,res)=>{
+contactRouter.get('/contact',(req,res)=>{
     res.render('eyenet/views/contact');
 });
 inquireRouter.get('/',(req,res)=>{
-    res.render('eyenet/views/inquire');
+    res.render('eyenet/contact-page/contact');
 });
 inquireRouter.post('/',(req,res)=>{
     db.query(`insert into tblinquiry

@@ -165,14 +165,7 @@ p4{
 p5{
     font-size: 14pt;
 }
-.lefty{
-    float: left;
-    margin: 25px;
-}
-.righty{
-    float: left;
-    margin: 25px;
-}
+
 .pics{
     z-index: 9;
     width: 200px;
@@ -185,12 +178,21 @@ p5{
     width: 100%;
 
 }
-.a{
-    padding-left: 175px; 
-}
-.b{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%; 
-}
+  
+  /* Pattern styles */
+
+  .left-half {
+    background: #ff9e2c;
+    float: left;
+    width: 50%
+  }
+  
+  .right-half {
+    background: #b6701e;
+    float: right;
+    width: 50%;
+  }
+  .courses{
+        position: absolute;
+      width: 100%;
+  }
