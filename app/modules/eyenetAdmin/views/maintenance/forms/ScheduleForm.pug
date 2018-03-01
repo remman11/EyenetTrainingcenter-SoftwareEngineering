@@ -5,7 +5,7 @@ block content
         div.padl.padd.padb
             div.ui.segment.eheight
                 div.ui.top.attached.massive.inverted.centered.green.label Create Schedule
-                form#val.ui.form.mleft.height5(method="POST" action=`/eyenetAdmin/newsched`)
+                form#val.ui.form.mleft.height5(method="POST" action=`/eyenetAdmin/createSchedule`)
                     div.ui.three.fields
                         div.ui.field
                             label.ui Select Course
@@ -25,6 +25,7 @@ block content
                         div.ui.field
                             label.ui.large.teal.tag Remarks
                             input(type="text" name="rem" placeholder="Short Description")
+                        input(type="hidden" name="SID" value=ID)
                     div.ui.two.fields
                         div.ui.field
                             label.ui Proctor / Professor

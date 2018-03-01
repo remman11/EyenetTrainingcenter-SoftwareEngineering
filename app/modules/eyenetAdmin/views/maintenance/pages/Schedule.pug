@@ -25,7 +25,8 @@ block content
                                     td=user.strSDesc
                                     td=user.datStartDate
                                     td=user.datEndDate
-                                    td=user.strStatusDesc
+                                    td
+                                        label.ui.fluid.center.aligned(class=user.strStatusColor)=user.strStatusDesc
                                     td.center.aligned
                                         a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}/view`): i.brown.big.open.folder.outline.icon
                                         a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}`): i.blue.big.edit.icon

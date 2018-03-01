@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 
 function status(req,res,next){
     db.query(`select * from tblstatus`,(err,results,field)=>{
-        req.fields = results;
+        req.stats = results;
         return next();
     });
 }
@@ -39,11 +39,20 @@ function course(req,res,next){
     });
 }
 function renderSchedpage(req,res){
-    res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{nips : req.fields, tips : req.proctors, lips : req.courses});
+    db.query(`select MAX (intSchedID) AS intSchedID from tblsched`,(err,results,field)=>{
+        res.locals.ID = results[0].intSchedID;
+        res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{nips : req.fields, tips : req.proctors, lips : req.courses});
+    })
+}
+function renderSchedform(req,res){
+    db.query(`SELECT MAX(intSchedID)AS intSchedID from tblsched`,(err,results,field)=>{
+        res.locals.ID = results[0].intSchedID;
+        return res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{nips :req.stats, tips : req.proctors, lips : req.courses});
+    })
 }
 
 function schedList(req,res,next){
-    db.query(`select * from tblschedlist`,(err,resul,fields)=>{
+    db.query(`select * from tblschedlist where MAX(StrStatusDesc);`,(err,resul,fields)=>{
         req.lists = resul;
         return next();
     });
@@ -337,7 +346,7 @@ router.put('/proctors/:intProctorID',(req,res)=>{
     strProctorName = "${req.body.etypename}"
     where intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
         if(err) throw err;
-        res.redirect('/eyenetAdmin/proctors');
+        res.redirect('/eyenetAdmin/proctors');  
     })
 });
 
@@ -358,8 +367,24 @@ router.get('/proctors/:intProctorID/delete',(req,res)=>{
 
 
 
-router.get('/createSchedule',authMiddleware.hasAuth,status,proctor,course,renderSchedpage);
+router.get('/createSchedule',authMiddleware.hasAuth,status,proctor,course,renderSchedform);
 
+router.post(`/createSchedule`,(req,res)=>{
+    var newID = counter.smart(req.body.SID);
+    var logs = req.body;
+    console.log(logs);
+    db.query(`INSERT INTO tblsched
+    (intSchedID,
+    strSDesc,datStartDate,datEndDate,
+    strSRemarks,
+    intSCourseID,intSStatusID,intProctorID)
+    VALUES (${newID},"${req.body.schedname}","${req.body.dstart}","${req.body.dend}",
+            "${req.body.rem}",
+        ${req.body.scourse},${req.body.stats},${req.body.procs});`,(err,results,fields)=>{
+            if(err) throw err;
+            return res.redirect(`/eyenetAdmin/scheduleList`);
+    })
+});
 router.get('/scheduleList',authMiddleware.hasAuth,course);
 
 router.get('/scheduleList',(req,res)=>{
@@ -369,60 +394,6 @@ router.get('/scheduleList',(req,res)=>{
     })
 });
 
-router.get('/scheduleList/:intSchedID/view',authMiddleware.hasAuth,schedList,(req,res)=>{
-    db.query(`SELECT * FROM tblschedlist where intSchedID = "${req.params.intSchedID}"`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/scheduleList');
-        res.render('eyenetAdmin/views/maintenance/pages/schedView',{form : results[0] });
-    })
-}); 
-
-router.get('/scheduleList/:intSchedID/edit',authMiddleware.hasAuth,renderSchedpage,(req,res)=>{
-    db.query(`SELECT * FROM tblsched where intProctorID = "${req.params.intProctorID}"`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/schedList');
-        res.render('eyenetAdmin/views/maintenance/forms/ScheduleForm',{form : results[0] });
-    })
-});
-
-router.put('/scheduleList/:intSchedID/edit',(req,res)=>{
-    db.query(`update tblsched set
-    datStartDate = "${req.body.dstart}",
-    datEndDate = "${req.body.dend}",
-    strSRemarks = "${req.body.rem}",
-    intSCourseID = "${req.body.scourse}"
-    intSStatusID = "${req.body.stats}"
-    intProctorID = "${req.body}" 
-    where intSchedID = "${req.params.intSchedID}"`,(err,results,field)=>{
-        if(err) throw err;
-        res.redirect('/eyenetAdmin/proctors');
-    })
-});
-
-router.post('/newsched',(req,res)=>{
-    
-    db.query(`insert into tblsched (datStartDate,
-        datEndDate,
-        strSDesc,
-        strSRemarks,
-        intSCourseID,
-        intSStatusID,
-        intProctorID) 
-    VALUES ("${req.body.dstart}",
-    "${req.body.dend}",
-    "${req.body.schedname}"
-    "${req.body.rem}",
-    ${req.body.scourse},
-    ${req.body.stats},
-    ${req.body.procs});`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        
-        return res.redirect('/eyenetAdmin/scheduleList');
-    }) 
-});
 
 //end Schedule
 
@@ -599,26 +570,10 @@ function schedList(req,res,next){
 function selectccna(req,res,next){db.query(`select * from tblschedview where intSCourseID = 1`,(err,res,fields)=>{req.pans = res;return next();});}
 function selectccnp(req,res,next){db.query(`select * from tblschedview where intSCourseID = 2`,(err,res,fields)=>{req.hats = res;return next();});}
 function selectcybs(req,res,next){db.query(`select * from tblschedview where intScourseID = 3`,(err,res,fields)=>{req.ants = res;return next();});}
+function renderCCNA(req,res){db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,field)=>{res.locals.ID = results[0].intUserID;return res.render(`eyenetAdmin/views/transactions/forms/EnrollmentFormCCNA`,{pans: req.pans});})}
+function renderCCNP(req,res){db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,field)=>{res.locals.ID = results[0].intUserID;return res.render(`eyenetAdmin/views/transactions/forms/EnrollmentFormCCNP`,{hats: req.hats});})}
+function renderCybersec(req,res){db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,fields)=>{res.locals.ID = results[0].intUserID;return res.render(`eyenetadmin/views/transactions/forms/EnrollmentFormCybersec`,{ants : req.ants});})}
 
-function renderCCNA(req,res){
-    db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,field)=>{
-        res.locals.ID = results[0].intUserID;
-        return res.render(`eyenetAdmin/views/transactions/forms/EnrollmentFormCCNA`,{pans: req.pans});
-    })
-}
-function renderCCNP(req,res){
-    db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,field)=>{
-        res.locals.ID = results[0].intUserID;
-        return res.render(`eyenetAdmin/views/transactions/forms/EnrollmentFormCCNP`,{hats: req.hats});
-    });
-}
-function renderCybersec(req,res){
-    db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,fields)=>{
-        res.locals.ID = results[0].intUserID
-        return res.render(`eyenetadmin/views/transactions/forms/EnrollmentFormCybersec`,{ants : req.ants});
-    })
-}
-    
 router.get(`/enrollment/ccna`,authMiddleware.hasAuth,selectccna,renderCCNA);
 router.get(`/enrollment/ccnp`,authMiddleware.hasAuth,selectccnp,renderCCNP);
 router.get(`/enrollment/cybersecurity`,authMiddleware.hasAuth,selectcybs,renderCybersec);
@@ -627,6 +582,7 @@ router.post(`/enrollment/ccna`,(req,res)=>{
     var nnID = counter.smart(req.body.PID);
     var active = 1; 
     var utype = 2;
+    var ccna = `ccna for ${newID}`;
     db.query(`insert into tbluser
             (intUserID,
             strUFName,strUMName,strULName,
@@ -640,8 +596,17 @@ router.post(`/enrollment/ccna`,(req,res)=>{
     });
     db.query(`insert into tblaccount 
             (intAUserID,strAUsername,strAPassword,intAStatusID,intAUserTypeID)
-            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,(err,results,field)=>{
+            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,
+            `insert into tblschedline
+            (strSchedListDesc,intSLSchedID,intSLUserID)
+            value("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
                 if(err) throw err;   
+            });
+    db.query(`insert into tblschedline
+            (strSchedListDesc,intSLSchedID,intSLUserID)
+            values 
+            ("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
+                if(err) throw err;
             });
     return res.redirect('/eyenetAdmin/enrollment');
 });
@@ -650,6 +615,7 @@ router.post(`/enrollment/ccnp`,(req,res)=>{
     var nnID = counter.smart(req.body.PID);
     var active = 1; 
     var utype = 2;
+    var ccna = `ccnp for ${newID}`;
     db.query(`insert into tbluser
             (intUserID,
             strUFName,strUMName,strULName,
@@ -663,8 +629,17 @@ router.post(`/enrollment/ccnp`,(req,res)=>{
     });
     db.query(`insert into tblaccount 
             (intAUserID,strAUsername,strAPassword,intAStatusID,intAUserTypeID)
-            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,(err,results,field)=>{
+            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,
+            `insert into tblschedline
+            (strSchedListDesc,intSLSchedID,intSLUserID)
+            value("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
                 if(err) throw err;   
+            });
+    db.query(`insert into tblschedline
+            (strSchedListDesc,intSLSchedID,intSLUserID)
+            values 
+            ("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
+                if(err) throw err;
             });
     return res.redirect('/eyenetAdmin/enrollment');
 });
@@ -673,6 +648,7 @@ router.post(`/enrollment/cybersecurity`,(req,res)=>{
     var nnID = counter.smart(req.body.PID);
     var active = 1; 
     var utype = 2;
+    var ccna = `cybersec for ${newID}`;
     db.query(`insert into tbluser
             (intUserID,
             strUFName,strUMName,strULName,
@@ -686,56 +662,26 @@ router.post(`/enrollment/cybersecurity`,(req,res)=>{
     });
     db.query(`insert into tblaccount 
             (intAUserID,strAUsername,strAPassword,intAStatusID,intAUserTypeID)
-            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,(err,results,field)=>{
+            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,
+            `insert into tblschedline
+            (strSchedListDesc,intSLSchedID,intSLUserID)
+            value("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
                 if(err) throw err;   
+            });
+    db.query(`insert into tblschedline
+            (strSchedListDesc,intSLSchedID,intSLUserID)
+            values 
+            ("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
+                if(err) throw err;
             });
     return res.redirect('/eyenetAdmin/enrollment');
 });
-
-
-function renderSchedList(req,res){
-    res.render(`eyenetAdmin/views/transactions/forms/EnrollmentForm`,{lists :req.lists,shits:req.courses,vcourses: req.vcourses});
-}
-function renderSchedList2(req,res){
-    res.render(`eyenetAdmin/views/transactions/forms/EnrollmentForm2`,{lists :req.lists,shits:req.courses,vcourses: req.vcourses});
-}
 router.get('/enrollment',authMiddleware.hasAuth,(req,res)=>{
     res.render(`eyenetAdmin/views/transactions/pages/Enrollment`);
 });
 
-
-
 router.get(`/contact`,(req,res)=>{
     res.render(`/eyenetAdmin/views/contacts`);
-});
-router.get(`/enrollment2`,authMiddleware.hasAuth,course,renderSchedList2,(req,res)=>{
-    res.render(`eyenetAdmin/views/transactions/forms/EnrollmentForm2`);
-});
-router.get(`/enrollment2`,authMiddleware.hasAuth,course,renderSchedList2,(req,res)=>{
-    res.render(`eyenetAdmin/views/transactions/forms/EnrollmentForm2`);
-});
-router.get(`/enrollment2/`)
-router.post('/enrollment/new',(req,res)=>{
-    db.query(`insert into tbluser 
-    (
-        strULName,
-        strUFName,
-        strUMName,
-        datUBirthday,
-        strUMobNum,
-        strUEmail) 
-        VALUES (
-                "${req.body.lname}",
-                "${req.body.fname}",
-                "${req.body.mname}",
-                "${req.body.bday}",
-                "${req.body.mobnum}",
-                "${req.body.email}");`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        console.log(results);
-        return res.redirect('/eyenetAdmin/usertype');
-    }) 
 });
 
 router.get('/scheduleList',authMiddleware.hasAuth,course);
@@ -757,26 +703,24 @@ db.query(`SELECT * FROM tblschedlist where intSchedID = "${req.params.intSchedID
     })
 }); 
 
-
-
-
 // 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
 
 // inquiries
 
 router.get('/inquiries',(req,res)=>{
-    db.query(`select * from tblinquiry`,(err,results,field)=>{
+    db.query(`select * from tblinquirylist`,(err,results,field)=>{
         return res.render('eyenetAdmin/views/transactions/pages/inquiries',{users : results});
         console.log(results);  
     })
 });
-router.get('/inquiries/:intInquiryID/view',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`SELECT * FROM tblinquiry where intInquiryID =  "${req.params.intInquiryID}"`,(err,results,field)=>{
+router.get(`/inquiries/:intInquiryID`,(req,res)=>{
+    db.query(`select * from tblinquirylist where intInquiryID = "${req.params.intInquiryID}"`,(err,results,field)=>{
         if(err) throw err;
         console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/inquiries');
-        res.render('eyenetAdmin/views/transactions/pages/inquiryView',{form : results[0] });
+        if(results[0]==null) res.redirect(`/eyenetAdmin/inquiries`);
+        return res.render(`eyenetAdmin/views/transactions/pages/inquiryView`,{form: results[0]});
     })
 });
+
 
 exports.eyenetAdmin = router;

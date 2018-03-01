@@ -5,6 +5,18 @@
 # Software Updates
 
 # `What's New!`
+## 9. March 02, 2018 2:47:AM `For Defense` `Patch 9`
+`Important` the system is almost at 70% by this time
+
+`Additions`
+- [x] the Users can now view their course details
+`Bugfixes`
+- [x] fixed a bug where the app crashes when pressing the view in the inquiry list
+- [x] fixed a bug where the schedule won't add 
+- [x] fixed a bug where the Enrollment doesn't insert the schedule ID
+`Notes`
+- Validations is a Must
+
 ## 8. March 01, 2018 4:15:00 AM patch 8
 `Additions`
 - [x] added the Assign Activities in transactions

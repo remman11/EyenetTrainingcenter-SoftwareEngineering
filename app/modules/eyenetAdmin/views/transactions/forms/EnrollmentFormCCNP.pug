@@ -8,7 +8,7 @@ block content
                 divy.ui.top.attached.tabular.menu.height4
                     a.item#first(class= (activeTab === 'info' ? 'active' : '') data-tab="first") Personal Information
                 div.ui.bottom.attached.tab.segment#ftab(data-tab='first')
-                    form#cybersec.ui.form.mleft.height3(method="POST" action=`/eyenetAdmin/enrollment/cybersecurity`)
+                    form#cybersec.ui.form.mleft.height3(method="POST" action=`/eyenetAdmin/enrollment/ccnp`)
                         div.ui.three.fields
                             div.ui.field
                                 label.ui.large.teal.tag Last Name
@@ -32,6 +32,7 @@ block content
                                 select#sel.search.selection.dropdown(name="sched")
                                     each hat in hats
                                         option(value=`${hat.intSchedID}`) #{hat.strSDesc} (#{hat.datStartDate} - #{hat.datEndDate})
+                                type
                         div.ui.three.fields
                             div.ui.field
                                 label.ui.large.teal.tag Telephone Number

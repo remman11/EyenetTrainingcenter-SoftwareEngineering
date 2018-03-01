@@ -8,7 +8,7 @@ block content
                 divy.ui.top.attached.tabular.menu.height4
                     a.item#first(class= (activeTab === 'info' ? 'active' : '') data-tab="first") Personal Information
                 div.ui.bottom.attached.tab.segment#ftab(data-tab='first')
-                    form#cybersec.ui.form.mleft.height3(method="POST" action=`/eyenetAdmin/enrollment/cybersecurity`)
+                    form#cybersec.ui.form.mleft.height3(method="POST" action=`/eyenetAdmin/enrollment/ccna`)
                         div.ui.three.fields
                             div.ui.field
                                 label.ui.large.teal.tag Last Name
@@ -19,7 +19,6 @@ block content
                             div.ui.field
                                 label.ui.large.teal.tag Middle Name
                                 input(type="text" name="mname" placeholder="Middle Name")
-                            input(type="hidden" name="PID" value=ID)
                         div.ui.field
                             label.ui.large.teal.tag Address
                             input(type="text" name="address" placeholder="Address")
@@ -31,7 +30,7 @@ block content
                                 label.ui Select Schedule
                                 select#sel.search.selection.dropdown(name="sched")
                                     each pan in pans
-                                        option(value=`${pan.intSchedID}`) #{pan.strSDesc} (#{pan.datStartDate} - #{pan.datEndDate})
+                                        option(value=pan.intSchedID) #{pan.strSDesc}
                         div.ui.three.fields
                             div.ui.field
                                 label.ui.large.teal.tag Telephone Number
@@ -52,6 +51,7 @@ block content
                             div.ui.field
                                 label.ui.large.teal.tag Confirm Password
                                 input(type="password" name="confirm" placeholder="Confirm Password")
+                            input(type="hidden" name="PID" value=ID)
                     div.height3
                         div.ui.two.fields
                         button#click.green.ui.button.huge(type="submit")  Next
