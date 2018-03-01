@@ -6,37 +6,37 @@ block content
             div.ui.segment.eheight
                 div.ui.top.attached.large.inverted.green.label Schedule Information
                     i.large.setting.icon
-                div.omar
-                    a.omar.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/createSchedule")
-                        i.add.icon
-                        |&nbsp; Create New Schedule
                 div.maro
                     div.ui.height3
-                        table.ui.celled.padded.table
-                            thead
-                                tr.single.line.center.aligned 
-                                    th.three.wide Start 
-                                    th.four.wide End
-                                    th.three.wide Info
-                                    th Status
-                                    th.two.wide Actions
-                            each user in users
-                                tr
-                                    td=user.datStartDate
-                                    td=user.datEndDate
-                                    td=user.strSRemarks
-                                    td=user.strStatusDesc
-                                    td.center.aligned
-                                        a.item(href=`/scheduleList/:intSchedID/view`): i.black.big.open.folder.outline.icon
-                                        a.item(href=`/scheduleList/:intSchedID`): i.black.big.edit.icon
-                                        a.item(href=`/scheduleList/:intSchedID/delete`): i.black.big.remove.icon
-                                    script.
-                                        {
-                                            var eo = document.getElementById("main");
-                                            var et = document.getElementById("sched");
-                                            var ee = document.getElementById("con1");
-                                            ee.classList.add("active")
-                                            eo.classList.add("active");
-                                            et.classList.add("active");
-                                        }
-                    
+                        div.ui.container.height
+                            table.ui.padded.teal.table
+                                tbody
+                                    each sched in sched
+                                        tr
+                                            td.three.wide Course Name
+                                            td #{sched.strCName}#{sched.strCDetails}
+                                        tr 
+                                            td Start Date
+                                            td=sched.datStartDate
+                                        tr 
+                                            td End Date
+                                            td=sched.datEndDate
+                                        tr
+                                            td Remarks
+                                            td=sched.strSRemarks
+                                        tr
+                                            td Proctor Name
+                                            td=sched.strProctorName
+                                        tr 
+                                            td Status
+                                            td=sched.strStatusDesc
+                                            script.
+                                                {
+                                                    var eo = document.getElementById("main");
+                                                    var et = document.getElementById("sched");
+                                                    var ee = document.getElementById("con1");
+                                                    ee.classList.add("active")
+                                                    eo.classList.add("active");
+                                                    et.classList.add("active");
+                                                }
+                            

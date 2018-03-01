@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../../lib/database')();
 var authMiddleware = require('../auth/middlewares/auth');
-var counter = require('../auth/middlewares/SC');
+var counter = require('../auth/middlewares/SC')
 
 var aboutRouter = express.Router();
 var contactRouter = express.Router();

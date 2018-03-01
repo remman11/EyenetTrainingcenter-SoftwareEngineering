@@ -3,15 +3,85 @@ var router = express.Router();
 var db = require('../../lib/database')();
 var authMiddleware = require('../auth/middlewares/auth');
 var counter = require('../auth/middlewares/SC');
-
+var global = {};
 router.use((req, res, next) => {
     res.locals.activeTab = req.query.active;
     return next();
 });
 
+
+// functions o plenty
+
+function status(req,res,next){
+    db.query(`select * from tblstatus`,(err,results,field)=>{
+        req.fields = results;
+        return next();
+    });
+}
+function renderStatus(req,res){
+    res.render(`eyenetAdmin/views/maintenance/forms/CourseForm`,{ships : req.fields});
+}
+
+router.get(`/contacts`,(req,res)=>{
+    res.render(``);
+});
+
+function proctor(req,res,next){
+    db.query(`select * from tblproctor`,(err,results,field)=>{
+        req.proctors = results;
+        return next();
+    });
+}
+function course(req,res,next){
+    db.query(`select * from tblcourse`,(err,resu,fiel)=>{
+        req.courses = resu;
+        return next();
+    });
+}
+function renderSchedpage(req,res){
+    res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{nips : req.fields, tips : req.proctors, lips : req.courses});
+}
+
+function schedList(req,res,next){
+    db.query(`select * from tblschedlist`,(err,resul,fields)=>{
+        req.lists = resul;
+        return next();
+    });
+}
+function renderSchedList(req,res){
+    res.render(`eyenetAdmin/views/maintenance/pages/schedView`,{lists :req.lists});
+}
+
+function scheduleActivities(req,res)
+{
+    db.query(`select * from tblschedact`,(err,results,field)=>{
+        req.actives = results;
+        return next ();
+    });
+}
+function activities(req,res,next){
+    db.query(`select * from tblactivities`,(err,results,field)=>{
+        req.actives = results;
+        return next ();
+    });
+}
+
+function renderAssignActivities(req,res){
+    res.render(`eyenetAdmin/views/transactions/forms/AssignActivitiesForm`,{seeds: req.actives,lists: req.lists});
+}
+
+router.get(`/assignActivities`,activities,schedList,renderAssignActivities);
 router.get('/dashboard',(req,res)=>{
     res.render('eyenetAdmin/views/dashboard');
 });
+
+
+/**
+ * .post
+ *  global = req.body
+ *  
+ * 
+ */
 
 // dito magsisimula ang lahat ng kababalaghan sa program na ito.
 
@@ -72,16 +142,6 @@ router.get('/activities/:intActID/delete',(req,res)=>{
 
 // course maintenance interface backend
 
-function status(req,res,next){
-    db.query(`select * from tblstatus`,(err,results,field)=>{
-        req.fields = results;
-        return next();
-    });
-}
-function renderStatus(req,res){
-    res.render(`eyenetAdmin/views/maintenance/forms/CourseForm`,{ships : req.fields});
-}
-
 router.get('/course',authMiddleware.hasAuth,(req,res)=>{
     db.query(`select * from tblcourse`,(err,results,field)=>{
         return res.render('eyenetAdmin/views/maintenance/pages/Course',{users : results});
@@ -107,7 +167,7 @@ router.get('/course/:intCID',authMiddleware.hasAuth,(req,res)=>{
         if(err) throw err;
         console.log(err);
         if(results[0]==null) res.redirect('/eyenetAdmin/course');
-        res.render('eyenetAdmin/views/maintenance/forms/CourseForm',{form : results[0]});
+        res.render('eyenetAdmin/views/maintenance/forf/ms/CourseForm',{form : results[0]});
     })
 });
 
@@ -296,31 +356,7 @@ router.get('/proctors/:intProctorID/delete',(req,res)=>{
 
 // Schedule
 
-function proctor(req,res,next){
-    db.query(`select * from tblproctor`,(err,results,field)=>{
-        req.proctors = results;
-        return next();
-    });
-}
-function course(req,res,next){
-    db.query(`select * from tblcourse`,(err,resu,fiel)=>{
-        req.courses = resu;
-        return next();
-    });
-}
-function renderSchedpage(req,res){
-    res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{nips : req.fields, tips : req.proctors, lips : req.courses});
-}
 
-function schedList(req,res,next){
-    db.query(`select * from tblschedlist`,(err,resul,fields)=>{
-        req.lists = resul;
-        return next();
-    });
-}
-function renderSchedList(req,res){
-    res.render(`eyenetAdmin/views/maintenance/pages/schedView`,{lists :req.lists});
-}
 
 router.get('/createSchedule',authMiddleware.hasAuth,status,proctor,course,renderSchedpage);
 
@@ -369,12 +405,14 @@ router.post('/newsched',(req,res)=>{
     
     db.query(`insert into tblsched (datStartDate,
         datEndDate,
+        strSDesc,
         strSRemarks,
         intSCourseID,
         intSStatusID,
         intProctorID) 
     VALUES ("${req.body.dstart}",
     "${req.body.dend}",
+    "${req.body.schedname}"
     "${req.body.rem}",
     ${req.body.scourse},
     ${req.body.stats},
@@ -512,6 +550,218 @@ router.get('/studentList',(req,res)=>{
 
 // 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
 
+// assign activities
+
+router.get(`/assignActivities`,activities,schedList,renderAssignActivities);
+
+router.post(`/assignActivities`,(req,res)=>{
+    db.query(`insert into tblschedact (intSASchedID,intSAActivitiesID,strSADetails) VALUES ("${req.body.sched}","${req.body.act}","${req.body.details}");`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        return res.redirect('/eyenetAdmin/assignActivities');
+    }) 
+});
+
+// end of assign activities
+
+// 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
+
+// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+
+// enrollment
+
+function course(req,res,next){
+    db.query(`select * from tblcourse`,(err,resu,fiel)=>{
+        req.courses = resu;
+        return next();
+    });
+}
+function vcourseSched(req,res,next){
+    db.query(`SELECT strSDesc,datStartDate, datEndDate FROM tblsched JOIN tblcourse ON intCID = intSCourseID WHERE intCID = '${req.body.selcourse}'`,(err,resu,fiel)=>{
+        req.vcourses = resu;
+        return next();
+    }); 
+}
+function renderSchedpage(req,res){
+    res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{nips : req.fields, tips : req.proctors, lips : req.courses, vcourses: req.vcourses});
+}
+function courseSched(req,res){
+    db.query(`select * from tblsched where "${req.params.intCourseID}"`)
+
+}
+function schedList(req,res,next){
+    db.query(`select * from tblschedlist`,(err,resul,fields)=>{
+        req.lists = resul;
+        return next();
+    });
+}
+
+function selectccna(req,res,next){db.query(`select * from tblschedview where intSCourseID = 1`,(err,res,fields)=>{req.pans = res;return next();});}
+function selectccnp(req,res,next){db.query(`select * from tblschedview where intSCourseID = 2`,(err,res,fields)=>{req.hats = res;return next();});}
+function selectcybs(req,res,next){db.query(`select * from tblschedview where intScourseID = 3`,(err,res,fields)=>{req.ants = res;return next();});}
+
+function renderCCNA(req,res){
+    db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,field)=>{
+        res.locals.ID = results[0].intUserID;
+        return res.render(`eyenetAdmin/views/transactions/forms/EnrollmentFormCCNA`,{pans: req.pans});
+    })
+}
+function renderCCNP(req,res){
+    db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,field)=>{
+        res.locals.ID = results[0].intUserID;
+        return res.render(`eyenetAdmin/views/transactions/forms/EnrollmentFormCCNP`,{hats: req.hats});
+    });
+}
+function renderCybersec(req,res){
+    db.query(`select MAX(intUserID) as intUserID from tbluser`,(err,results,fields)=>{
+        res.locals.ID = results[0].intUserID
+        return res.render(`eyenetadmin/views/transactions/forms/EnrollmentFormCybersec`,{ants : req.ants});
+    })
+}
+    
+router.get(`/enrollment/ccna`,authMiddleware.hasAuth,selectccna,renderCCNA);
+router.get(`/enrollment/ccnp`,authMiddleware.hasAuth,selectccnp,renderCCNP);
+router.get(`/enrollment/cybersecurity`,authMiddleware.hasAuth,selectcybs,renderCybersec);
+router.post(`/enrollment/ccna`,(req,res)=>{
+    var newID = counter.smart(req.body.PID);
+    var nnID = counter.smart(req.body.PID);
+    var active = 1; 
+    var utype = 2;
+    db.query(`insert into tbluser
+            (intUserID,
+            strUFName,strUMName,strULName,
+            strUMobNum,strUTelNum,strUEmail,
+            datUBirthday,intUStatusID) values
+            ("${newID}",
+            "${req.body.fname}","${req.body.mname}","${req.body.lname}",
+            "${req.body.mobnum}","${req.body.telnum}","${req.body.email}",
+            "${req.body.bday}","${active}");`,(err,results,field)=>{
+                if(err) throw err;
+    });
+    db.query(`insert into tblaccount 
+            (intAUserID,strAUsername,strAPassword,intAStatusID,intAUserTypeID)
+            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,(err,results,field)=>{
+                if(err) throw err;   
+            });
+    return res.redirect('/eyenetAdmin/enrollment');
+});
+router.post(`/enrollment/ccnp`,(req,res)=>{
+    var newID = counter.smart(req.body.PID);
+    var nnID = counter.smart(req.body.PID);
+    var active = 1; 
+    var utype = 2;
+    db.query(`insert into tbluser
+            (intUserID,
+            strUFName,strUMName,strULName,
+            strUMobNum,strUTelNum,strUEmail,
+            datUBirthday,intUStatusID) values
+            ("${newID}",
+            "${req.body.fname}","${req.body.mname}","${req.body.lname}",
+            "${req.body.mobnum}","${req.body.telnum}","${req.body.email}",
+            "${req.body.bday}","${active}");`,(err,results,field)=>{
+                if(err) throw err;
+    });
+    db.query(`insert into tblaccount 
+            (intAUserID,strAUsername,strAPassword,intAStatusID,intAUserTypeID)
+            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,(err,results,field)=>{
+                if(err) throw err;   
+            });
+    return res.redirect('/eyenetAdmin/enrollment');
+});
+router.post(`/enrollment/cybersecurity`,(req,res)=>{
+    var newID = counter.smart(req.body.PID);
+    var nnID = counter.smart(req.body.PID);
+    var active = 1; 
+    var utype = 2;
+    db.query(`insert into tbluser
+            (intUserID,
+            strUFName,strUMName,strULName,
+            strUMobNum,strUTelNum,strUEmail,
+            datUBirthday,intUStatusID) values
+            ("${newID}",
+            "${req.body.fname}","${req.body.mname}","${req.body.lname}",
+            "${req.body.mobnum}","${req.body.telnum}","${req.body.email}",
+            "${req.body.bday}","${active}");`,(err,results,field)=>{
+                if(err) throw err;
+    });
+    db.query(`insert into tblaccount 
+            (intAUserID,strAUsername,strAPassword,intAStatusID,intAUserTypeID)
+            values("${newID}","${req.body.username}","${req.body.password}","${active}","${utype}")`,(err,results,field)=>{
+                if(err) throw err;   
+            });
+    return res.redirect('/eyenetAdmin/enrollment');
+});
+
+
+function renderSchedList(req,res){
+    res.render(`eyenetAdmin/views/transactions/forms/EnrollmentForm`,{lists :req.lists,shits:req.courses,vcourses: req.vcourses});
+}
+function renderSchedList2(req,res){
+    res.render(`eyenetAdmin/views/transactions/forms/EnrollmentForm2`,{lists :req.lists,shits:req.courses,vcourses: req.vcourses});
+}
+router.get('/enrollment',authMiddleware.hasAuth,(req,res)=>{
+    res.render(`eyenetAdmin/views/transactions/pages/Enrollment`);
+});
+
+
+
+router.get(`/contact`,(req,res)=>{
+    res.render(`/eyenetAdmin/views/contacts`);
+});
+router.get(`/enrollment2`,authMiddleware.hasAuth,course,renderSchedList2,(req,res)=>{
+    res.render(`eyenetAdmin/views/transactions/forms/EnrollmentForm2`);
+});
+router.get(`/enrollment2`,authMiddleware.hasAuth,course,renderSchedList2,(req,res)=>{
+    res.render(`eyenetAdmin/views/transactions/forms/EnrollmentForm2`);
+});
+router.get(`/enrollment2/`)
+router.post('/enrollment/new',(req,res)=>{
+    db.query(`insert into tbluser 
+    (
+        strULName,
+        strUFName,
+        strUMName,
+        datUBirthday,
+        strUMobNum,
+        strUEmail) 
+        VALUES (
+                "${req.body.lname}",
+                "${req.body.fname}",
+                "${req.body.mname}",
+                "${req.body.bday}",
+                "${req.body.mobnum}",
+                "${req.body.email}");`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        console.log(results);
+        return res.redirect('/eyenetAdmin/usertype');
+    }) 
+});
+
+router.get('/scheduleList',authMiddleware.hasAuth,course);
+
+router.get('/scheduleList',(req,res)=>{
+    db.query(`select * from tblschedlist`,(err,results,field)=>{
+        return res.render('eyenetAdmin/views/maintenance/pages/schedule',{users : results});
+        console.log(results);  
+    })
+});
+
+router.get('/scheduleList/:intSchedID/view',authMiddleware.hasAuth,(req,res)=>{
+db.query(`SELECT * FROM tblschedlist where intSchedID = "${req.params.intSchedID}"`,(err,results,field)=>{
+        if(err) throw err;
+        console.log(err);
+        if(results[0]==null) res.redirect('/eyenetAdmin/scheduleList');
+        res.render('eyenetAdmin/views/maintenance/pages/schedView',{sched : results[0]});
+        console.log(results[0]);
+    })
+}); 
+
+
+
+
+// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+
 // inquiries
 
 router.get('/inquiries',(req,res)=>{
@@ -520,30 +770,13 @@ router.get('/inquiries',(req,res)=>{
         console.log(results);  
     })
 });
-
-router.get('/inquiries/:intUserTypeID',authMiddleware.hasAuth,(req,res)=>{
-    db.query(`SELECT * FROM tblinquiry where intInquiryID = "${req.params.intInquiryID}"`,(err,results,field)=>{
+router.get('/inquiries/:intInquiryID/view',authMiddleware.hasAuth,(req,res)=>{
+    db.query(`SELECT * FROM tblinquiry where intInquiryID =  "${req.params.intInquiryID}"`,(err,results,field)=>{
         if(err) throw err;
         console.log(err);
         if(results[0]==null) res.redirect('/eyenetAdmin/inquiries');
-        res.render('eyenetAdmin/views/transactions/pages/inquiryView',{form : results[0]});
+        res.render('eyenetAdmin/views/transactions/pages/inquiryView',{form : results[0] });
     })
-});
-
-router.put('/inquiries/:intUserTypeID',(req,res)=>{
-    db.query(`update tblusertype set
-    strUTName = "${req.body.etypename}"
-    where intUserTypeID = "${req.params.intUserTypeID}"`,(err,results,field)=>{
-        if(err) throw err;
-        res.redirect('/eyenetAdmin/usertype');
-    })
-});
-
-router.get('/inquiries/:intUserTypeID/delete',(req,res)=>{
-    db.query(`DELETE FROM tblusertype WHERE intUserTypeID = "${req.params.intUserTypeID}"`,(err,results,field)=>{
-        if(err) throw err;
-        res.redirect('/eyenetAdmin/usertype');
-    });
 });
 
 exports.eyenetAdmin = router;

@@ -1,15 +1,23 @@
 # Eyenet Training Center Information System
 ##### A web-based application software for The Eyenet Training Center
-##### In partial Fulfillment for: `COMP 3033 Software Engineering (Final Project)
+##### In partial Fulfillment for: `COMP 3033 Software Engineering (Final Project)`
 
 # Software Updates
 
-# `New`
-
+# `What's New!`
+## 8. March 01, 2018 4:15:00 AM patch 8
+`Additions`
+- [x] added the Assign Activities in transactions
+- [x] added the Enrollment in transactions;
+- [x] added the sweetAlert Validation in the Login Page
+`Notes`
+##### Detected bugs
+- [x] app crashes when adding new sched apparently the issues is the ID number of the schedule
+ 
 ## 7. February 26, 2018 6:45:00PM patch 7
 `Additions`
 - added the payment type maintenance
--`New`
+- `New` in `patch 7`
 - `tab only`added Assign Activities in transactions 
 - `tab only`added Document Requests in transactions 
 - `tab only`added Enrollment in transactions 
@@ -88,9 +96,6 @@
 - working CRUD for User Type
 - working CRUD for Schedule Type
 - render page for Reports of Student List
-
-
-
 
 
 

@@ -5,9 +5,11 @@ block content
         div.padl.padd.padb
             div.ui.segment.eheight
                 div.ui.top.attached.large.inverted.green.label Activities
-                a.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/activities/new")
-                    i.add.icon
-                    |&nbsp; Add Activities
+                a.button.green.right.floated.ui.basic.animated.button.huge(href="/eyenetAdmin/activities/new" tabindex="0")
+                    div.visible.content Add Activities
+                    div.hidden.content
+                        i.add.icon
+                    
                 div.paddd
                 table.ui.padded.table
                     thead
@@ -18,8 +20,8 @@ block content
                         tr.center.aligned
                             td=user.strActDesc
                             td.center.aligned
-                                a.item(href=`/eyenetAdmin/activities/${user.intActID}`): i.black.big.edit.icon
-                                a.item(href=`/eyenetAdmin/activities/${user.intActID}/delete`): i.black.big.remove.icon
+                                a.item(href=`/eyenetAdmin/activities/${user.intActID}` data-tooltip="Edit" data-position="bottom center"): i.black.big.edit.icon
+                                a.item(href=`/eyenetAdmin/activities/${user.intActID}/delete` data-tooltip="Delete" data-position="bottom center"): i.black.big.remove.icon
                             script.
                                 {
                                     var eo = document.getElementById("main");

@@ -5,6 +5,30 @@ block content
         div.padl.padd.padb
             div.ui.segment.eheight
                 div.ui.ribbon.label.big.inverted.blue 
-                    p #{form ? 'Edit' : 'Add'} Status Type
-                div.ui.field
-                    input(type="hidden" name="smid" value=ID)
+                    p #{form ? 'View' : 'Add'} Status Type
+                table.ui.padded.teal.table
+                    tbody
+                        each form in form
+                            tr
+                                td.three.wide Inquiry Date
+                                td=form.datIDate
+                            tr 
+                                td Subject
+                                td=form.strISubject
+                            tr 
+                                td Guest Name
+                                td=form.strGuestName
+                            tr
+                                td Message
+                                td=form.strIMessage
+                            
+                                script.
+                                    {
+                                        var eo = document.getElementById("main");
+                                        var et = document.getElementById("sched");
+                                        var ee = document.getElementById("con1");
+                                        ee.classList.add("active")
+                                        eo.classList.add("active");
+                                        et.classList.add("active");
+                                    }
+                
