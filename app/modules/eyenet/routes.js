@@ -18,7 +18,7 @@ aboutRouter.get('/',(req,res)=>{
     res.render('eyenet/views/about');
 });
 contactRouter.get('/',(req,res)=>{
-    res.render('eyenet/views/contact');
+    res.render('eyenet/contact-page/contact');
 });
 inquireRouter.get('/',(req,res)=>{
     res.render('eyenet/views/inquire');
