@@ -18,7 +18,7 @@ aboutRouter.get('/',(req,res)=>{
     res.render('eyenet/views/about');
 });
 contactRouter.get('/',(req,res)=>{
-    res.render('eyenet/contact-page/contact');
+    res.render('eyenet/views/contact');
 });
 inquireRouter.get('/',(req,res)=>{
     res.render('eyenet/views/inquire');
@@ -60,7 +60,7 @@ signupRouter.post(`/enrollment/ccna`,(req,res)=>{
     var ccna = `ccna for ${newID}`;
     db.query(`insert into tbluser
             (intUserID,
-            strUFName,strUMName,strULName,
+            strUFName,  strUMName,strULName,
             strUMobNum,strUTelNum,strUEmail,
             datUBirthday,intUStatusID) values
             ("${newID}",

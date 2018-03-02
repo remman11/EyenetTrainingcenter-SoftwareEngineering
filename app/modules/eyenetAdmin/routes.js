@@ -57,6 +57,12 @@ function schedList(req,res,next){
         return next();
     });
 }
+function sched(req,res,next){
+    db.query(`select * from tblsched`,(err,result,field)=>{
+        req.scheds = result;
+        return next ();
+    })
+}
 function renderSchedList(req,res){
     res.render(`eyenetAdmin/views/maintenance/pages/schedView`,{lists :req.lists});
 }
@@ -75,11 +81,33 @@ function activities(req,res,next){
     });
 }
 
-function renderAssignActivities(req,res){
-    res.render(`eyenetAdmin/views/transactions/forms/AssignActivitiesForm`,{seeds: req.actives,lists: req.lists});
+
+function asched(req,res,next){
+    db.query(`select * from tblsched`,(err,results,field)=>{
+        req.ascheds = results;
+        return next();
+    })
+}
+function aactivities(req,res,next){
+    db.query(`select * from tblactivities`,(err,results,field)=>{
+        req.aactives = results;
+        return next();
+    })          
+}
+function arenderAssignActivities(req,res){
+    res.render(`eyenetAdmin/views/transactions/forms/AssignActivitiesForm`,{pills: req.aactives, hills: req.ascheds});
 }
 
-router.get(`/assignActivities`,activities,schedList,renderAssignActivities);
+router.get(`/assignActivities`,aactivities,asched,arenderAssignActivities);
+router.post('/assignActivities/new',(req,res)=>{
+    db.query(`insert into tblschedact (intSASchedID,intSAActivitiesID,strSADetails) 
+    values (${req.body.schedule},${req.body.act},"${req.body.details}");`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect(`/eyenetAdmin/assignActivities`);
+    }) 
+});
+
+
 router.get('/dashboard',(req,res)=>{
     res.render('eyenetAdmin/views/dashboard');
 });
@@ -176,7 +204,7 @@ router.get('/course/:intCID',authMiddleware.hasAuth,(req,res)=>{
         if(err) throw err;
         console.log(err);
         if(results[0]==null) res.redirect('/eyenetAdmin/course');
-        res.render('eyenetAdmin/views/maintenance/forf/ms/CourseForm',{form : results[0]});
+        res.render('eyenetAdmin/views/maintenance/forms/CourseForm',{form : results[0]});
     })
 });
 
@@ -247,7 +275,7 @@ router.put('/equiptype/:intEquipTypeID',(req,res)=>{
 router.get('/equiptype/:intEquipTypeID/delete',(req,res)=>{
     db.query(`DELETE FROM tblequiptype WHERE intEquipTypeID = "${req.params.intEquipTypeID}"`,(err,results,field)=>{
         if(err) throw err;
-        res.redirect('/eyenetAdmin/equipr');
+        res.redirect('/eyenetAdmin/equiptype');
     });
 });
 
@@ -523,15 +551,6 @@ router.get('/studentList',(req,res)=>{
 
 // assign activities
 
-router.get(`/assignActivities`,activities,schedList,renderAssignActivities);
-
-router.post(`/assignActivities`,(req,res)=>{
-    db.query(`insert into tblschedact (intSASchedID,intSAActivitiesID,strSADetails) VALUES ("${req.body.sched}","${req.body.act}","${req.body.details}");`,(err,results,field)=>{
-        if(err) throw err;
-        console.log(err);
-        return res.redirect('/eyenetAdmin/assignActivities');
-    }) 
-});
 
 // end of assign activities
 

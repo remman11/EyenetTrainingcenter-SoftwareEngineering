@@ -5,18 +5,18 @@ block content
         div.padl.padd.padb
             div.ui.segment.eheight
                 div.ui.top.attached.massive.inverted.centered.green.label Assign Activities
-                form#val.ui.form.mleft.height5(method="POST" action=`/eyenetAdmin/assignActivities`)
+                form#val.ui.form.mleft.height5(method="POST" action=`/eyenetAdmin/assignActivities/new`)
                     div.ui.three.fields
                         div.ui.field
-                            label.ui Select Schedule
-                            select#sel.search.selection.dropdown(name="sched")
-                                each list in lists
-                                    option(value=list.intSchedID) #{list.strSDesc}
+                            label Select Schedule
+                            select#sel.search.selection.dropdown(name="schedule")
+                                each hill in hills
+                                    option(value=hill.intSchedID) #{hill.strSDesc}
                         div.ui.field
                             label.ui Select Activity
                             select#sele.search.selection.dropdown(name="act")
-                                each seed in seeds
-                                    option(value=seed.intActID) #{seed.strActDesc}
+                                each pill in pills
+                                    option(value=pill.intActID) #{pill.strActDesc}
                         div.ui.field
                             label.ui Activity details
                             input(type="text" name="details" placeholder="Date")

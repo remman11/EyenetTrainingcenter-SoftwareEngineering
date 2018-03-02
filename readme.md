@@ -5,6 +5,18 @@
 # Software Updates
 
 # `What's New!`
+
+## 10. March 02, 2018 6:36:PM `EIS v0.0.1`
+
+`Bugfixes`
+- [x] fixed a bug where the adding of activities crashes when pressing submit
+- [x] fixed a bug where the app crashes when pressing the equipment edit
+- [x] fixed a bug where the app crashes when adding the a course type
+- [x] fixed a bug where the app crashes when pressing the view on the inquiries
+
+`Additions` 
+- added validations to the enrollment in the signup side
+
 ## 9. March 02, 2018 2:47:AM `For Defense` `Patch 9`
 `Important` the system is almost at 70% by this time
 

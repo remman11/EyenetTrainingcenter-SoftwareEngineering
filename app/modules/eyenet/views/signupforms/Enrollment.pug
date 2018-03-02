@@ -1,37 +1,38 @@
 extends ../../../../templates/eyenetbase 
 
 block body
-    div.ui.container
-        div.padl.padd.padb
-            div.ui.segment
-                div.ui.top.attached.massive.inverted.centered.green.label Enrollment
-                div.height3
-                    div.ui.grey.huge.ribbon.label.height3 Select Course
-                form#val.ui.form.height3()
-                    div.ui.fluid.field
-                        a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/ccna" tabindex="0")
-                            div.visible.content CCNA
-                            div.hidden.content 
-                                p CISCO CERTIFIED NETWORK ASSOCIATE
-                    div.ui.fluid.field
-                        a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/ccnp" tabindex="0")
-                            div.visible.content CCNP
-                            div.hidden.content 
-                                p CISCO CERTIFIED NETWORK PROFESSIONAL
-                    div.ui.fluid
-                        a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/cybersecurity" tabindex="0")
-                            div.visible.content CyberSec
-                            div.hidden.content
-                                p Cyber Security Track
-                    script.
-                        $('#sel,#sele').dropdown();
-                        {
-                            var eo = document.getElementById("tran");
-                            var et = document.getElementById("assign");
-                            var ee = document.getElementById("con2");
-                            var ef = document.getElementById("trans");
-                            ee.classList.add("active")
-                            eo.classList.add("active");
-                            et.classList.add("active");
-                            ef.classList.add("active");
-                        }
+    div.cover
+        div.ui.container
+            div.padl.padd.padb
+                div.ui.segment
+                    div.ui.top.attached.massive.inverted.centered.green.label Enrollment
+                    div.height3
+                        div.ui.grey.huge.ribbon.label.height3 Select Course
+                    form#val.ui.form.height3()
+                        div.ui.fluid.field
+                            a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/ccna" tabindex="0")
+                                div.visible.content CCNA
+                                div.hidden.content 
+                                    p CISCO CERTIFIED NETWORK ASSOCIATE
+                        div.ui.fluid.field
+                            a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/ccnp" tabindex="0")
+                                div.visible.content CCNP
+                                div.hidden.content 
+                                    p CISCO CERTIFIED NETWORK PROFESSIONAL
+                        div.ui.fluid
+                            a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/cybersecurity" tabindex="0")
+                                div.visible.content CyberSec
+                                div.hidden.content
+                                    p Cyber Security Track
+                        script.
+                            $('#sel,#sele').dropdown();
+                            {
+                                var eo = document.getElementById("tran");
+                                var et = document.getElementById("assign");
+                                var ee = document.getElementById("con2");
+                                var ef = document.getElementById("trans");
+                                ee.classList.add("active")
+                                eo.classList.add("active");
+                                et.classList.add("active");
+                                ef.classList.add("active");
+                            }
