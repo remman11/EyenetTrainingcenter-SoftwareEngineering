@@ -38,6 +38,19 @@ function course(req,res,next){
         return next();
     });
 }
+
+function schedStatus(req,res,next){
+    db.query(`select * from tblschedstatus`,(err,resu,fiel)=>{
+        req.sstats = resu;
+        return next();
+    });
+}
+function schedStatusE(req,res,next){
+    db.query(`select * from tblschedstatusedit`,(err,resu,fiel)=>{
+        req.statss = resu;
+        return next();
+    });
+}
 function renderSchedpage(req,res){
     db.query(`select MAX (intSchedID) AS intSchedID from tblsched`,(err,results,field)=>{
         res.locals.ID = results[0].intSchedID;
@@ -47,7 +60,13 @@ function renderSchedpage(req,res){
 function renderSchedform(req,res){
     db.query(`SELECT MAX(intSchedID)AS intSchedID from tblsched`,(err,results,field)=>{
         res.locals.ID = results[0].intSchedID;
-        return res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{nips :req.stats, tips : req.proctors, lips : req.courses});
+        return res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{dips : req.sstats, tips : req.proctors, lips : req.courses});
+    })
+}
+function renderSchedformE(req,res){
+    db.query(`SELECT MAX(intSchedID)AS intSchedID from tblsched`,(err,results,field)=>{
+        res.locals.ID = results[0].intSchedID;
+        return res.render(`eyenetAdmin/views/maintenance/forms/ScheduleFormE`,{dips : req.statss, tips : req.proctors, lips : req.courses});
     })
 }
 
@@ -81,7 +100,6 @@ function activities(req,res,next){
     });
 }
 
-
 function asched(req,res,next){
     db.query(`select * from tblsched`,(err,results,field)=>{
         req.ascheds = results;
@@ -107,18 +125,9 @@ router.post('/assignActivities/new',(req,res)=>{
     }) 
 });
 
-
 router.get('/dashboard',(req,res)=>{
     res.render('eyenetAdmin/views/dashboard');
 });
-
-
-/**
- * .post
- *  global = req.body
- *  
- * 
- */
 
 // dito magsisimula ang lahat ng kababalaghan sa program na ito.
 
@@ -395,8 +404,22 @@ router.get('/proctors/:intProctorID/delete',(req,res)=>{
 
 
 
-router.get('/createSchedule',authMiddleware.hasAuth,status,proctor,course,renderSchedform);
-
+router.get('/createSchedule',authMiddleware.hasAuth,schedStatus,proctor,course,renderSchedform);
+router.get(`/:intSchedID/edit`,authMiddleware.hasAuth,schedStatus,proctor,course,renderSchedform,(req,res)=>{
+    db.query(`select * from tblsched where intSchedID = "${req.params.intSchedID}"`,(err,results,fields)=>{
+        if(err) throw err;
+        console.log(err);
+        if(results[0]==null) res.redirect(`eyenetAdmin/scheduleList`);
+        res.render(`eyenetAdmin/views/maintenance/forms/ScheduleForm`,{push : results[0]});
+    });
+});
+router.put(`/intSchedID/edit`,(req,res)=>{
+    db.query(`update tblsched set
+            intStatusID = ${req.body.stats}`,(err,results,field)=>{
+                if(err) throw(err);
+                res.redirect(`eyenetAdmin/scheduleList`);
+            })
+});
 router.post(`/createSchedule`,(req,res)=>{
     var newID = counter.smart(req.body.SID);
     var logs = req.body;
@@ -413,7 +436,6 @@ router.post(`/createSchedule`,(req,res)=>{
             return res.redirect(`/eyenetAdmin/scheduleList`);
     })
 });
-router.get('/scheduleList',authMiddleware.hasAuth,course);
 
 router.get('/scheduleList',(req,res)=>{
     db.query(`select * from tblschedlist`,(err,results,field)=>{
@@ -421,7 +443,12 @@ router.get('/scheduleList',(req,res)=>{
         console.log(results);  
     })
 });
-
+router.get('/scheduleList/:intSchedID/delete',(req,res)=>{
+    db.query(`Delete from tblsched where intSchedID = "${req.params.intSchedID}"`,(err,results,field)=>{
+        if(err) throw err;
+        return res.redirect(`/eyenetAdmin/scheduleList`);
+    })
+});
 
 //end Schedule
 
@@ -711,16 +738,14 @@ router.get('/scheduleList',(req,res)=>{
         console.log(results);  
     })
 });
-
-router.get('/scheduleList/:intSchedID/view',authMiddleware.hasAuth,(req,res)=>{
-db.query(`SELECT * FROM tblschedlist where intSchedID = "${req.params.intSchedID}"`,(err,results,field)=>{
+router.get(`/scheduleList/:intSchedID/view`,(req,res)=>{
+    db.query(`select * from tblschedlist where intSchedID = "${req.params.intSchedID}"`,(err,results,field)=>{
         if(err) throw err;
         console.log(err);
-        if(results[0]==null) res.redirect('/eyenetAdmin/scheduleList');
-        res.render('eyenetAdmin/views/maintenance/pages/schedView',{sched : results[0]});
-        console.log(results[0]);
+        if(results[0]==null) res.redirect(`/eyenetAdmin/scheduleList`);
+        return res.render(`eyenetAdmin/views/maintenance/pages/schedView`,{form: results[0]});
     })
-}); 
+});
 
 // 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
 
@@ -741,5 +766,11 @@ router.get(`/inquiries/:intInquiryID`,(req,res)=>{
     })
 });
 
+router.get(`/inquiries/:intInquiryID/delete`,(req,res)=>{
+    db.query(`DELETE FROM tblinquiry WHERE intInquiryID = "${req.params.intInquiryID}"`,(err,results,field)=>{
+        if(err) throw err;
+        res. redirect(`/eyenetAdmin/inquiries`);
+    })
+});
 
 exports.eyenetAdmin = router;

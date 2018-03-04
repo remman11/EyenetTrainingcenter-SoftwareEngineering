@@ -9,27 +9,30 @@ block content
                 div.maro
                     div.ui.height3
                         div.ui.container.height
-                            table.ui.padded.teal.table
+                            table.ui.padded.black.table
                                 tbody
-                                    each sched in sched
                                         tr
                                             td.three.wide Course Name
-                                            td #{sched.strCName}#{sched.strCDetails}
+                                            td #{form.strCName} &nbsp; (#{form.strCDetails})
                                         tr 
                                             td Start Date
-                                            td=sched.datStartDate
+                                            td=form.datStartDate
                                         tr 
                                             td End Date
-                                            td=sched.datEndDate
+                                            td=form.datEndDate
                                         tr
                                             td Remarks
-                                            td=sched.strSRemarks
+                                            td=form.strSRemarks
                                         tr
                                             td Proctor Name
-                                            td=sched.strProctorName
+                                            td=form.strProctorName
                                         tr 
                                             td Status
-                                            td=sched.strStatusDesc
+                                            td=form.strStatusDesc
+                            a.button.green.ui.basic.animated.button.huge(href="/eyenetAdmin/scheduleList" tabindex="0")
+                                div.visible.content back
+                                div.hidden.content
+                                    i.arrow.left.icon
                                             script.
                                                 {
                                                     var eo = document.getElementById("main");

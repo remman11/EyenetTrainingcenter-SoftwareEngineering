@@ -5,9 +5,10 @@ block content
         div.padl.padd.padb
             div.ui.segment.eheight
                 div.ui.top.attached.large.inverted.green.label Payment
-                a.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/paymentType/new")
-                    i.add.icon
-                    |&nbsp; Add Payment Type
+                a.button.green.right.floated.ui.basic.animated.button.huge(href="/eyenetAdmin/paymentType/new")
+                    div.visible.content Add Payment Type
+                    div.hidden.content
+                        i.add.icon
                 div.paddd
                 table.ui.padded.table
                     thead
@@ -18,8 +19,8 @@ block content
                         tr 
                             td=user.strPayTypeName
                             td.center.aligned
-                                a.item(href=`/eyenetAdmin/paymentType/${user.intPayTypeID}`): i.black.big.edit.icon
-                                a.item(href=`/eyenetAdmin/paymentType/${user.intPayTypeID}/delete`): i.black.big.remove.icon
+                                a.item(href=`/eyenetAdmin/paymentType/${user.intPayTypeID}`): i.blue.big.edit.icon
+                                a.item(href=`/eyenetAdmin/paymentType/${user.intPayTypeID}/delete`): i.red.big.remove.icon
                             script.
                                 {
                                     var eo = document.getElementById("main");

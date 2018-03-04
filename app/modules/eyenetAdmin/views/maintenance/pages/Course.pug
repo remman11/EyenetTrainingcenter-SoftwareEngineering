@@ -6,7 +6,7 @@ block content
             div.ui.segment.eheight
                 div.ui.top.attached.large.inverted.green.label Course Type
                 a.button.green.right.floated.ui.basic.animated.button.huge(href="/eyenetAdmin/course/new")
-                    div.visible.content Add Activities
+                    div.visible.content Add Course
                     div.hidden.content
                         i.add.icon
                 div.paddd
@@ -21,8 +21,8 @@ block content
                             td=user.strCName
                             td=user.strCDetails
                             td.center.aligned
-                                a.item(href=`/eyenetAdmin/course/${user.intCID}`): i.black.big.edit.icon
-                                a.item(href=`/eyenetAdmin/course/${user.intCID}/delete`): i.black.big.remove.icon
+                                a.item(href=`/eyenetAdmin/course/${user.intCID}`): i.blue.big.edit.icon
+                                a.item(href=`/eyenetAdmin/course/${user.intCID}/delete`): i.red.big.remove.icon
                             script.
                                 {
                                     var eo = document.getElementById("main");

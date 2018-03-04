@@ -6,6 +6,22 @@
 
 # `What's New!`
 
+## 11. March 04, 2008 11:53:00 PM `EIS v0.0.2`
+
+`Bugfixes`
+
+- [x] fixed a bug where the app crashes when a certain inquiry is deleted
+- [x] fixed a bug where the app crashes when you pressed view in the Schedule List
+- [x] fixed a bug where the app crashes when you pressed delete in the Schedule List
+
+`Additions`
+
+- the latest added schedule is now displayed at the top of the schedule list
+- added button interactions for the all the maintenance in maintenance tab
+- the schedule form now displays appropriate statuses when a creating a schedule
+
+
+
 ## 10. March 02, 2018 6:36:PM `EIS v0.0.1`
 
 `Bugfixes`
@@ -22,10 +38,12 @@
 
 `Additions`
 - [x] the Users can now view their course details
+
 `Bugfixes`
 - [x] fixed a bug where the app crashes when pressing the view in the inquiry list
 - [x] fixed a bug where the schedule won't add 
 - [x] fixed a bug where the Enrollment doesn't insert the schedule ID
+
 `Notes`
 - Validations is a Must
 

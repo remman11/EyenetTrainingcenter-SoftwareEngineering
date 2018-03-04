@@ -5,20 +5,20 @@ block content
         div.padl.padd.padb
             div.ui.segment.eheight
                 div.ui.top.attached.large.inverted.green.label Schedule List
-                    i.large.setting.icon
                 div.omar
-                    a.omar.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/createSchedule")
-                        i.add.icon
-                        |&nbsp; Create New Schedule
+                    a.button.green.right.floated.ui.basic.animated.button.huge(href="/eyenetAdmin/createSchedule")
+                        div.visible.content Add Schedule
+                        div.hidden.content
+                            i.add.icon
                 div.maro
                     div.ui.height3
                         table.ui.celled.padded.table
                             thead
                                 tr.single.line.center.aligned 
                                     th.three.wide Info
-                                    th.four.wide Start 
-                                    th.four.wide End
-                                    th Status
+                                    th.three.wide Start 
+                                    th.three.wide End
+                                    th.two.wide Status
                                     th.two.wide Actions
                             each user in users
                                 tr
@@ -26,10 +26,10 @@ block content
                                     td=user.datStartDate
                                     td=user.datEndDate
                                     td
-                                        label.ui.fluid.center.aligned(class=user.strStatusColor)=user.strStatusDesc
+                                        label.ui(class=user.strStatusColor)=user.strStatusDesc
                                     td.center.aligned
                                         a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}/view`): i.brown.big.open.folder.outline.icon
-                                        a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}`): i.blue.big.edit.icon
+                                        a.item(href=`/eyenetAdmin/${user.intSchedID}/edit`): i.blue.big.edit.icon
                                         a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}/delete`): i.red.big.remove.icon
                                     script.
                                         {

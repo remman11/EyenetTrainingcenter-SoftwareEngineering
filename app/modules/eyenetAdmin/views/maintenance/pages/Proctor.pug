@@ -5,9 +5,10 @@ block content
         div.padl.padd.padb
             div.ui.segment.eheight
                 div.ui.top.attached.large.inverted.green.label Proctors / Professors
-                a.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/proctors/new")
-                    i.add.icon
-                    |&nbsp; Add Proctor
+                a.button.green.right.floated.ui.basic.animated.button.huge(href="/eyenetAdmin/proctors/new")
+                    div.visible.content Add Proctor
+                    div.hidden.content
+                        i.add.icon
                 div.paddd
                 table.ui.padded.table
                     thead
@@ -18,8 +19,8 @@ block content
                         tr
                             td=user.strProctorName
                             td.center.aligned
-                                a.item(href=`/eyenetAdmin/proctors/${user.intProctorID}`): i.black.big.edit.icon
-                                a.item(href=`/eyenetAdmin/proctors/${user.intProctorID}/delete`): i.black.big.remove.icon
+                                a.item(href=`/eyenetAdmin/proctors/${user.intProctorID}`): i.blue.big.edit.icon
+                                a.item(href=`/eyenetAdmin/proctors/${user.intProctorID}/delete`): i.red.big.remove.icon
                             script.
                                 {
                                     var eo = document.getElementById("main");

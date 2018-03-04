@@ -5,9 +5,10 @@ block content
         div.padl.padd.padb
             div.ui.segment.eheight
                 div.ui.top.attached.large.inverted.green.label Equipment Type
-                a.button.green.right.floated.ui.basic.button.huge(href="/eyenetAdmin/equiptype/new")
-                    i.add.icon
-                    |&nbsp; Add Equipment Type
+                a.button.green.right.floated.ui.basic.animated.button.huge(href="/eyenetAdmin/equiptype/new")
+                    div.visible.content Add Equipment
+                    div.hidden.content
+                        i.add.icon
                 div.paddd
                 table.ui.padded.table
                     thead
@@ -18,8 +19,8 @@ block content
                         tr 
                             td=user.strETName 
                             td.center.aligned
-                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}`): i.black.big.edit.icon
-                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}/delete`): i.black.big.remove.icon
+                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}`): i.blue.big.edit.icon
+                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}/delete`): i.red.big.remove.icon
                             script.
                                 {
                                     var eo = document.getElementById("main");
