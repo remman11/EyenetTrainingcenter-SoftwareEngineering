@@ -6,7 +6,7 @@ block body
             div.padl.padd.padb
                 div.ui.segment
                     div.ui.top.attached.massive.inverted.centered.green.label Enrollment Form
-                    divy.ui.top.attached.tabular.menu.height4
+                    div.ui.top.attached.tabular.menu.height4
                         a.item#first(class= (activeTab === 'info' ? 'active' : '') data-tab="first") Personal Information
                     div.ui.bottom.attached.tab.segment#ftab(data-tab='first')
                         form#form.ui.form.mleft.height3(method="POST" action=`/signup/enrollment/ccnp`)
@@ -56,119 +56,123 @@ block body
                     
                         script.
                             $('#form')
-                                .form({
-                                    inline: 'true',
-                                    fields: {
-                                    fname: {
-                                        identifier: 'fname',
-                                        rules: [
-                                        {
-                                            type   : 'fname',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        }
-                                        ]
-                                        },
-                                    lname: {
-                                        identifier: 'lname',
-                                        rules: [
-                                        {
-                                            type   : 'empty',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        }
-                                        ]
-                                        },
-                                    bday: {
-                                        identifier: 'bday',
-                                        rules: [
-                                        {
-                                            type   : 'empty',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        }
-                                        ]
-                                        },
-                                    email: {
-                                        identifier: 'email',
-                                        rules: [
-                                        {
-                                            type   : 'empty',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        },
-                                        {
-                                            type   : 'email',
-                                            prompt : 'invalid email'
-                                        }
-                                        ]
-                                        },
-                                    telnum: {
-                                        identifier: 'telnum',
-                                        rules: [
-                                        {
-                                            type   : 'empty',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        },
-                                        {
-                                            type   : 'minLength[7]',
-                                            prompt : 'must be 7 characters'
-                                        },
-                                        {
-                                            type   : 'maxLength[9]',
-                                            prompt : '9 is the maximum characters'
-                                        }
-                                        ]
-                                        },
-                                    mobnum: {
-                                        identifier: 'mobnum',
-                                        rules: [
-                                        {
-                                            type   : 'empty',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        },
-                                        {
-                                            type   : 'minLength[11]',
-                                            prompt : 'must be 11 characters or More'
-                                        },
-                                        {
-                                            type   : 'maxLength[13]',
-                                            prompt : '13 is the maximum characters'
-                                        },
-                                        ]
-                                        },
-                                    username: {
-                                        identifier: 'username',
-                                        rules: [
-                                        {
-                                            type   : 'empty',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        }
-                                        ]
-                                        },
-                                    password: {
-                                        identifier: 'password',
-                                        rules: [
-                                        {
-                                            type   : 'empty',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        }
-                                        ]
-                                        },
-                                    confirm: {
-                                        identifier: 'confirm',
-                                        rules: [
-                                        {
-                                            type   : 'empty',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        },
-                                        {
-                                            type   : 'match[password]',
-                                            prompt : 'doesnt match'
-                                        }
-                                        
-                                        ]
-                                        },
-
- 
+                            .form({
+                                inline: 'true',
+                                fields: {
+                                fname: {
+                                    identifier: 'fname',
+                                    rules: [
+                                    {
+                                        type   : 'fname',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
                                     }
-                                    });
+                                    ]
+                                    },
+                                lname: {
+                                    identifier: 'lname',
+                                    rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                    }
+                                    ]
+                                    },
+                                bday: {
+                                    identifier: 'bday',
+                                    rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                    }
+                                    ]
+                                    },
+                                email: {
+                                    identifier: 'email',
+                                    rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                    },
+                                    {
+                                        type   : 'email',
+                                        prompt : 'invalid email'
+                                    }
+                                    ]
+                                    },
+                                telnum: {
+                                    identifier: 'telnum',
+                                    rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                    },
+                                    {
+                                        type   : 'minLength[7]',
+                                        prompt : 'must be 7 characters'
+                                    },
+                                    {
+                                        type   : 'maxLength[9]',
+                                        prompt : '9 is the maximum characters'
+                                    }
+                                    ]
+                                    },
+                                mobnum: {
+                                    identifier: 'mobnum',
+                                    rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                    },
+                                    {
+                                        type   : 'minLength[11]',
+                                        prompt : 'must be 11 characters or More'
+                                    },
+                                    {
+                                        type   : 'maxLength[13]',
+                                        prompt : '13 is the maximum characters'
+                                    },
+                                    ]
+                                    },
+                                username: {
+                                    identifier: 'username',
+                                    rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                    }
+                                    ]
+                                    },
+                                password: {
+                                    identifier: 'password',
+                                    rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                    },
+                                    {
+                                        type   : 'minLength[8]',
+                                        prompt : 'Your Password must be atleast 8 characters or more'
+                                    }
+                                    ]
+                                    },
+                                confirm: {
+                                    identifier: 'confirm',
+                                    rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                    },
+                                    {
+                                        type   : 'match[password]',
+                                        prompt : `Passwords doesn't match`
+                                    }
+                                    
+                                    ]
+                                    },
+
+
+                                }
+                                });
                         
                             $('#sel,#sele').dropdown();
                             {

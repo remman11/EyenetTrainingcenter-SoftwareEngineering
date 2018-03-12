@@ -22,10 +22,6 @@ function renderStatus(req,res){
     res.render(`eyenetAdmin/views/maintenance/forms/CourseForm`,{ships : req.fields});
 }
 
-router.get(`/contacts`,(req,res)=>{
-    res.render(``);
-});
-
 function proctor(req,res,next){
     db.query(`select * from tblproctor`,(err,results,field)=>{
         req.proctors = results;
@@ -116,14 +112,7 @@ function arenderAssignActivities(req,res){
     res.render(`eyenetAdmin/views/transactions/forms/AssignActivitiesForm`,{pills: req.aactives, hills: req.ascheds});
 }
 
-router.get(`/assignActivities`,aactivities,asched,arenderAssignActivities);
-router.post('/assignActivities/new',(req,res)=>{
-    db.query(`insert into tblschedact (intSASchedID,intSAActivitiesID,strSADetails) 
-    values (${req.body.schedule},${req.body.act},"${req.body.details}");`,(err,results,field)=>{
-        if(err) throw err;
-        res.redirect(`/eyenetAdmin/assignActivities`);
-    }) 
-});
+
 
 router.get('/dashboard',(req,res)=>{
     res.render('eyenetAdmin/views/dashboard');
@@ -402,8 +391,6 @@ router.get('/proctors/:intProctorID/delete',(req,res)=>{
 
 // Schedule
 
-
-
 router.get('/createSchedule',authMiddleware.hasAuth,schedStatus,proctor,course,renderSchedform);
 router.get(`/:intSchedID/edit`,authMiddleware.hasAuth,schedStatus,proctor,course,renderSchedform,(req,res)=>{
     db.query(`select * from tblsched where intSchedID = "${req.params.intSchedID}"`,(err,results,fields)=>{
@@ -503,6 +490,8 @@ router.get('/statustype/:intStatusID/delete',(req,res)=>{
     });
 });
 
+// End of Status Type
+
 // 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
 
 // 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
@@ -578,6 +567,14 @@ router.get('/studentList',(req,res)=>{
 
 // assign activities
 
+router.get(`/assignActivities`,aactivities,asched,arenderAssignActivities);
+router.post('/assignActivities/new',(req,res)=>{
+    db.query(`insert into tblschedact (intSASchedID,intSAActivitiesID,strSADetails) 
+    values (${req.body.schedule},${req.body.act},"${req.body.details}");`,(err,results,field)=>{
+        if(err) throw err;
+        res.redirect(`/eyenetAdmin/assignActivities`);
+    }) 
+});
 
 // end of assign activities
 
@@ -771,6 +768,33 @@ router.get(`/inquiries/:intInquiryID/delete`,(req,res)=>{
         if(err) throw err;
         res. redirect(`/eyenetAdmin/inquiries`);
     })
+});
+
+// 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
+
+// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+
+router.get(`/students`,(req,res)=>{
+    db.query(`select * from tblu`);
+});
+
+
+// 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 안냐 
+
+// 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
+
+router.get(`/reports/students`,(req,res)=>{
+    db.query(`select * from tblusercoursedetails order by strSDesc ASC`,(err,results,fields)=>{
+        if(err) throw err;
+        res.render(`eyenetAdmin/views/reports/students`,{kits : results});
+    });
+});
+
+router.get(`/reports/equipments`,(req,res)=>{
+    db.query(`select * from tblequipmentlist`,(err,results,fields)=>{
+        if(err) throw err;
+        res.render(`eyenetAdmin/views/reports/equipments`,{sits : results});
+    });
 });
 
 exports.eyenetAdmin = router;

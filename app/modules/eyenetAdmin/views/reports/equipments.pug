@@ -4,17 +4,19 @@ block content
     div.ui.container
         div.padl.padd.padb
             div.ui.segment.eheight
-                div.ui.top.attached.large.inverted.green.label Students 
+                div.ui.top.attached.large.inverted.green.label Equipments 
                     i.users.icon
                 table.ui.celled.padded.table
                     thead
                         tr.single.line.center.aligned 
-                            th.three.wide Name
-                            th.three.wide Course
-                        each kit in kits
+                            th Name 
+                            th State
+                            th Pieces
+                        each sit in sits
                             tr
-                                th.three.wide #{kit.strULName}, #{kit.strUFName} #{kit.strUMName}
-                                th #{kit.strSDesc} ( #{kit.strCDetails} ) 
+                                td #{sit.strETName} #{sit.strEDesc} 
+                                td #{sit.strEState}
+                                td #{sit.intEPieces}
                                 script.
                                     {
                                         var eo = document.getElementById("reports");

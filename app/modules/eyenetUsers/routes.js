@@ -22,4 +22,8 @@ router.get(`/courseinfo`,(req,res)=>{
         res.render(`eyenetUsers/views/CourseInformation`,{form : results[0]});
     })
 });
+
+router.get(`/documents`,(req,res)=>{
+    res.render(`eyenetUsers/views/documents`);
+});
 exports.eyenetUsers = router;

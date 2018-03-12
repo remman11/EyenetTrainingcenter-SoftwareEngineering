@@ -19,8 +19,8 @@ block content
                         tr 
                             td=user.strETName 
                             td.center.aligned
-                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}`): i.blue.big.edit.icon
-                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}/delete`): i.red.big.remove.icon
+                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}` data-tooltip="Edit" data-position="bottom center"): i.blue.big.edit.icon
+                                a.item(href=`/eyenetAdmin/equiptype/${user.intEquipTypeID}/delete` data-tooltip="Delete" data-position="bottom center"): i.red.big.remove.icon
                             script.
                                 {
                                     var eo = document.getElementById("main");

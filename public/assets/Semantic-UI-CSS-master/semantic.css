@@ -37248,6 +37248,13 @@ body.pushable > .pusher {
   top: 0;
   height: 450px;
 }
+.can
+{
+  border: 1px solid #d3d3d3;
+  background-image: url(`../files/EYENET.png`);
+  background-repeat:no-repeat;
+  background-position:center;
+}
 .bo{
 bottom: 0px;
 }
@@ -37305,6 +37312,10 @@ bottom: 0px;
 .ml
 {
   padding-left: 20px;
+}
+.mle
+{
+  margin-left: 20px;
 }
 .lm
 {

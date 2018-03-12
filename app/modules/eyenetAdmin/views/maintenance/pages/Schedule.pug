@@ -9,7 +9,7 @@ block content
                     a.button.green.right.floated.ui.basic.animated.button.huge(href="/eyenetAdmin/createSchedule")
                         div.visible.content Add Schedule
                         div.hidden.content
-                            i.add.icon
+                            i.calendar.plus.icon
                 div.maro
                     div.ui.height3
                         table.ui.celled.padded.table
@@ -28,9 +28,9 @@ block content
                                     td
                                         label.ui(class=user.strStatusColor)=user.strStatusDesc
                                     td.center.aligned
-                                        a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}/view`): i.brown.big.open.folder.outline.icon
-                                        a.item(href=`/eyenetAdmin/${user.intSchedID}/edit`): i.blue.big.edit.icon
-                                        a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}/delete`): i.red.big.remove.icon
+                                        a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}/view` data-tooltip="View Schedule" data-position="bottom center"): i.brown.big.open.folder.outline.icon
+                                        a.item(href=`/eyenetAdmin/${user.intSchedID}/edit` data-tooltip="Edit" data-position="bottom center"): i.blue.big.edit.icon
+                                        a.item(href=`/eyenetAdmin/scheduleList/${user.intSchedID}/delete` data-tooltip="Delete" data-position="bottom center"): i.red.big.remove.icon
                                     script.
                                         {
                                             var eo = document.getElementById("main");

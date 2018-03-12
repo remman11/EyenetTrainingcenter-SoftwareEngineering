@@ -35,7 +35,17 @@ block body
                     div.vertical.menu   
                         a#assign.item(href="/eyenetAdmin/assignActivities") Assign Activities
                         a#enrollment.item(href="/eyenetAdmin/enrollment") Enrollment
-                        a#inquiry.item(href="/eyenetAdmin/inquiries") Inquiries                
+                        a#document.item(href="/eyenetAdmin/documents") Document Requests
+                        a#inquiry.item(href="/eyenetAdmin/inquiries") Inquiries         
+                        a#students.item(href="/eyenetAdmin/students") Students
+            div#reports.item
+                div.title#rep Reports
+                    i.dropdown.icon
+                div#con3.content
+                    div.vertical.menu 
+                        a#equipments.item(href="/eyenetAdmin/reports/equipments") Equipments
+                        a#students.item(href="/eyenetAdmin/reports/students") Students  
+                             
     block content   
     script.
         $('.ui.accordion').accordion();

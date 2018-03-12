@@ -19,8 +19,8 @@ block content
                         tr 
                             td=user.strPayTypeName
                             td.center.aligned
-                                a.item(href=`/eyenetAdmin/paymentType/${user.intPayTypeID}`): i.blue.big.edit.icon
-                                a.item(href=`/eyenetAdmin/paymentType/${user.intPayTypeID}/delete`): i.red.big.remove.icon
+                                a.item(href=`/eyenetAdmin/paymentType/${user.intPayTypeID}` data-tooltip="Edit" data-position="bottom center"): i.blue.big.edit.icon
+                                a.item(href=`/eyenetAdmin/paymentType/${user.intPayTypeID}/delete` data-tooltip="Delete" data-position="bottom center"): i.red.big.remove.icon
                             script.
                                 {
                                     var eo = document.getElementById("main");

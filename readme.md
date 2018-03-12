@@ -6,8 +6,8 @@
 
 # `What's New!`
 
-## 11. March 04, 2008 11:53:00 PM `EIS v0.0.2`
-
+## 11. March 04, 20188 11:53:00 PM `EIS v0.0.2 α` 
+ 
 `Bugfixes`
 
 - [x] fixed a bug where the app crashes when a certain inquiry is deleted

@@ -22,7 +22,6 @@ block content
                                         a.item(href=`/eyenetAdmin/assignActivities/${user.intSchedID}/delete`): i.black.big.remove.icon
                                     script.
                                         {   
-                                            var db = require('/lib/database.js')
                                             db.query(`select * from tblschedact`,(err,results,field)=>{
                                                 console.log(results);
                                             });
