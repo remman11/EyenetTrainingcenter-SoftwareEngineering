@@ -29,6 +29,7 @@
     "method-override": "^2.3.9",
     "morgan": "^1.8.2",
     "mysql": "^2.13.0",
+    "nodemon": "^1.17.3",
     "pdfkit": "^0.8.3",
     "pug": "^2.0.0-rc.2",
     "semantic-ui-calendar": "0.0.8",
