@@ -1,0 +1,54 @@
+.jumbotron{
+    background: linear-gradient(to top,#009933, #6FC427);   
+    border-radius:0px;
+}
+.display-4{
+    color: white;
+    font-weight: bolder;
+}
+.q{
+    font-size:50px;
+}
+.ic{
+    color:black;
+}
+.ic:hover{
+    color: white;
+}
+.inqtitle{
+    color:white;
+    font-size:24px;
+}
+.det{
+    font-size:15px;
+}
+.icc{
+    color:#669966;
+}
+.bcollapse{
+    background-color:#009933;
+}
+.subt{
+    font-size:18px;
+    text-decoration: underline;
+}
+.subp{
+    font-size:22px;
+}
+.subh{
+    font-size:30px;
+}
+.subl{
+    font-size:15px;
+}
+.eislogo{
+    size:100px;
+}
+#inqmessage{
+    resize:none;
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+    
+    -webkit-appearance: none; 
+    margin: 0; 
+  }

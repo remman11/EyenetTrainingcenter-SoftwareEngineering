@@ -2,10 +2,6 @@ extends ./eyenetbase
 block body
     div.ui.secondary.top.fixed.pointing.menu
         div.right.menu
-            a.menu.item(href="/eyenetAdmin/messages")
-                i.circular.mail.outline.icon
-            a.menu.item(href="")
-                i.circular.setting.icon
             a.menu.item(href="/logout")     
                 i.circular.sign.out.icon 
                 p Log-out
@@ -33,11 +29,11 @@ block body
                     i.dropdown.icon
                 div#con2.content
                     div.vertical.menu   
-                        a#assign.item(href="/eyenetAdmin/assignActivities") Assign Activities
+                        //a#assign.item(href="/eyenetAdmin/assignActivities") Assign Activities
                         a#enrollment.item(href="/eyenetAdmin/enrollment") Enrollment
-                        a#document.item(href="/eyenetAdmin/documents") Document Requests
+                        //a#document.item(href="/eyenetAdmin/documents") Document Requests
                         a#inquiry.item(href="/eyenetAdmin/inquiries") Inquiries         
-                        a#students.item(href="/eyenetAdmin/students") Students
+                        //a#students.item(href="/eyenetAdmin/students") Students
             div#reports.item
                 div.title#rep Reports
                     i.dropdown.icon

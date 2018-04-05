@@ -5,7 +5,8 @@ block body
         div.ui.container
             div.padl.padd.padb
                 div.ui.segment
-                    div.ui.top.attached.massive.inverted.centered.green.label Enrollment Form
+                    div.ui.top.attached.massive.inverted.centered.green.label Enrollment Form 
+                        small.ui.black.label CCNA
                     div.ui.top.attached.tabular.menu.height4
                         a.item#first(class= (activeTab === 'info' ? 'active' : '') data-tab="first") Personal Information
                     div.ui.bottom.attached.tab.segment#ftab(data-tab='first')
@@ -52,7 +53,12 @@ block body
                                 input(type="hidden" name="PID" value=ID)
                             div.height3
                                 div.ui.two.fields
-                                button#click.green.ui.button.huge(type="submit")  Next
+                                    a.green.ui.animated.button.huge(href="/signup")
+                                        div.visible.content Back
+                                        div.hidden.content
+                                            i.backward.icon
+                            
+                                    button#click.green.ui.button.huge(type="submit")  Next
                     
                         script.
                             $('#form')
@@ -63,7 +69,7 @@ block body
                                     identifier: 'fname',
                                     rules: [
                                     {
-                                        type   : 'fname',
+                                        type   : 'empty',
                                         prompt : 'Please enter a Value, Field is Required and Cannot be blank'
                                     }
                                     ]

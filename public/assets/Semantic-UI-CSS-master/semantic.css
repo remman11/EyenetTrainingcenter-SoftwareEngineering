@@ -37235,6 +37235,12 @@ body.pushable > .pusher {
   top: 0;
   height: 450px;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
 .body{
   background-image: url(../Faculty/DuskG.png);
   height: width;

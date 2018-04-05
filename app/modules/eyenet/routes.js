@@ -25,14 +25,14 @@ inquireRouter.get('/',(req,res)=>{
 });
 inquireRouter.post('/',(req,res)=>{
     db.query(`insert into tblinquiry
-        (strGuestName,
+        (datIDate,strGuestName,
         strISubject,
         strGuestEmail,
         strIMessage) 
         values
-        ("${req.body.gname}","${req.body.subject}","${req.body.email}","${req.body.message}");`,(err,results,field)=>{
+        (curdate(),"${req.body.gname}","${req.body.subject}","${req.body.email}","${req.body.message}");`,(err,results,field)=>{
             if(err) throw err;
-            res.redirect('/login');
+            res.redirect('/login?success=inq');
     });
 });
 
@@ -83,7 +83,7 @@ signupRouter.post(`/enrollment/ccna`,(req,res)=>{
             ("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
                 if(err) throw err;
             });
-    return res.redirect('/login');
+    return res.redirect('/login?success=1');
 });
 signupRouter.post(`/enrollment/ccnp`,(req,res)=>{
     var newID = counter.smart(req.body.PID);
@@ -116,7 +116,7 @@ signupRouter.post(`/enrollment/ccnp`,(req,res)=>{
             ("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
                 if(err) throw err;
             });
-    return res.redirect('/login');
+    return res.redirect('/login?success=1');
 });
 signupRouter.post(`/enrollment/cybersecurity`,(req,res)=>{
     var newID = counter.smart(req.body.PID);
@@ -149,7 +149,7 @@ signupRouter.post(`/enrollment/cybersecurity`,(req,res)=>{
             ("${ccna}",${req.body.sched},${newID});`,(err,results,field)=>{
                 if(err) throw err;
             });
-    return res.redirect('/login');
+    return res.redirect('/login?success=1');
 });
 
 exports.signup = signupRouter;

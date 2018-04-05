@@ -7,7 +7,7 @@ block body
                 div.ui.segment
                     div.ui.top.attached.massive.inverted.centered.green.label Enrollment Form
                     div.ui.top.attached.tabular.menu.height4
-                        a.item#first(class= (activeTab === 'info' ? 'active' : '') data-tab="first") Personal Information
+                        a.item#first Personal Information
                     div.ui.bottom.attached.tab.segment#ftab(data-tab='first')
                         form#form.ui.form.mleft.height3(method="POST" action=`/signup/enrollment/ccna`)
                             div.ui.three.fields
@@ -52,7 +52,11 @@ block body
                                 input(type="hidden" name="PID" value=ID)
                             div.height3
                                 div.ui.two.fields
-                                button#click.green.ui.button.huge(type="submit")  Next
+                                    a.green.ui.animated.button.huge(href="/signup")
+                                        div.visible.content Back
+                                        div.hidden.content
+                                            i.backward.icon
+                                    button#click.green.ui.button.huge(type="submit")  Next
                     
                         script.
                             $('#form')
@@ -63,8 +67,8 @@ block body
                                         identifier: 'fname',
                                         rules: [
                                         {
-                                            type   : 'fname',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
+                                            type   : 'empty',
+                                            prompt : 'Please enter a val, Field is Required and Cannot be blank'
                                         }
                                         ]
                                         },
@@ -207,20 +211,4 @@ block body
                                 et.classList.add("active");
                                 ef.classList.add("active");
                             }                
-                            $('#form')
-                                .form({
-                                    inline: 'true',
-                                    fields: {
-                                    fname: {
-                                        identifier: 'fname',
-                                        rules: [
-                                        {
-                                            type   : 'fname',
-                                            prompt : 'Please enter a Value, Field is Required and Cannot be blank'
-                                        }
-                                        ]
-                                        
-                                        }
-                                    }
-                                    });
-                        
+                            

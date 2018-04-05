@@ -775,7 +775,10 @@ router.get(`/inquiries/:intInquiryID/delete`,(req,res)=>{
 // 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 안녕 
 
 router.get(`/students`,(req,res)=>{
-    db.query(`select * from tblu`);
+    db.query(`select * from tblusercoursedetails order by strSDesc ASC`,(err,results,fields)=>{
+        if(err) throw err;
+        res.render(`eyenetAdmin/views/reports/students`,{users : results});
+    });
 });
 
 

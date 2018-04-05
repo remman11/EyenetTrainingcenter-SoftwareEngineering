@@ -46,6 +46,25 @@ block body
                         text: 'incorrect username or password.'
                     })
                 }
+                var url = getUrlParam('success')
+                console.log(url);
+                if(url===`inq`)
+                {
+                    swal({
+                        type: 'success',
+                        text: 'Your inquiry have been submitted!'
+                    })
+                }
+                var url = getUrlParam('success')
+                console.log(url);
+                if(url===`1`)
+                {
+                    swal({
+                        type: 'success',
+                        text: 'Please Login to Download your Payment Voucher.'
+                    })
+                }
+                
                 function getUrlParam(name){
                     var results = new RegExp(`[\\?&]`+ name + `=([^&#]*)`).exec(window.location.href);
                     return (results && results[1]) || undefined;

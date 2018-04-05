@@ -7,23 +7,40 @@ block body
                 div.ui.segment
                     div.ui.top.attached.massive.inverted.centered.green.label Enrollment
                     div.height3
-                        div.ui.grey.huge.ribbon.label.height3 Select Course
+                        div.ui.
+                        div.ui.black.huge.ribbon.label.height3 Select Course
                     form#val.ui.form.height3()
-                        div.ui.fluid.field
-                            a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/ccna" tabindex="0")
-                                div.visible.content CCNA
-                                div.hidden.content 
-                                    p CISCO CERTIFIED NETWORK ASSOCIATE
-                        div.ui.fluid.field
-                            a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/ccnp" tabindex="0")
-                                div.visible.content CCNP
-                                div.hidden.content 
-                                    p CISCO CERTIFIED NETWORK PROFESSIONAL
-                        div.ui.fluid
-                            a.button.green.ui.basic.fluid.animated.fade.button.huge(href="/signup/enrollment/cybersecurity" tabindex="0")
-                                div.visible.content CyberSec
-                                div.hidden.content
-                                    p Cyber Security Track
+                        div.ui.green.three.cards
+                            a(href="/signup/enrollment/CCNA").ui.raised.card
+                                div.content
+                                    p Eyenet Information System
+                                div.content
+                                    div.center.aligned.img
+                                        img.fluid(src="/assets/eis/CCNA.png" height="200px" width="200px")                   
+                                div.extra.content
+                                    div.header Cisco Certified Network Associate
+                                    div.meta
+                                        span.category Course
+                            a(href="/signup/enrollment/CCNP").ui.raised.card
+                                div.content
+                                    p Eyenet Information System
+                                div.content
+                                    div.center.aligned.img
+                                        img.fluid(src="/assets/eis/CCNP.png" height="200px" width="200px")                   
+                                div.extra.content
+                                    div.header Cisco Certified Network Professional
+                                    div.meta
+                                        span.category Course
+                            a(href="/signup/enrollment/cybersecurity").ui.raised.card
+                                div.content
+                                    p Eyenet Information System
+                                div.content
+                                    div.center.aligned.img
+                                        img.fluid(src="/assets/eis/cybersecurity.png" height="200px" width="200px")                   
+                                div.extra.content
+                                    div.header Cyber Security
+                                    div.meta
+                                        span.category Course
                         script.
                             $('#sel,#sele').dropdown();
                             {

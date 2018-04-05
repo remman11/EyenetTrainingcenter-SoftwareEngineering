@@ -30,7 +30,7 @@ loginRouter.route('/')
             if(req.session.user.intAUserTypeID===1)
             return res.redirect(`/eyenetAdmin/dashboard`);
             else
-            return res.redirect(`/eyenetUsers/dashboard/"${req.session.user.strAUsername}"`);
+            return res.redirect(`/eyenetUsers/dashboard`);
         });
     });
 logoutRouter.get('/', (req, res) => {
